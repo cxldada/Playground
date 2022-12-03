@@ -1,0 +1,63 @@
+#+STARTUP: content
+
+* 文档结构 :struct:
+:PROPERTIES:
+:CUSTOM_ID: start
+:END:
+** 标题 :title:
+用‘*’个数来表示标题级别
+*** 常用快捷键
+1. 将关闭移动到标题处，使用 TAB 键来切换显示和隐藏标题及子标题，但不回显示内容。使用 S-TAB 来循环切换每一级标题以及标题下的内容
+2. M-RET 插入同级别标题或元素
+3. M-LEFT 或 M_RIGHT 升级或降级标题
+4. M-UP 或 M-DOWN 与同级别的标题切换顺序
+*** 修改打开文件时的默认状态
+1. 可以通过修改全局变量 org-start-folded 进行配置
+2. 也可以在每个文件中加入一下属性来对每个文件进行配置
+   - "#+STARTUP: overview" 表示打开时全部缩进
+   - "#+STARTUP: content" 表示打开时只显示标题，不显示内容
+   - "#+STARTUP: showall" 表示打开时全部显示
+   - "#+STARTUP: showeverything" 表示打开时全部显示
+** 表格 :table:
+<C-c |> 用的创建表格
+** 超链接 :link:
+创建格式：[[][]]、[[]]、[[#start]]
+支持文件，邮箱、bbdb、irc、info
+** todo 选项 :todo:
+- <C-c C-t> 把条目变成一个 todo 项。同时也可以切换 todo 项的状态
+- 可以修改 org-todo-keywords 变量来自定义 todo 关键字，例如:
+  #+begin_src emacs-lisp
+(setq org-todo-keywords
+      '((sequence "TODO" "FEEDBACK" "VERIFY" "|" "DONE" "DELEGATED")))
+;; 还可以设置自定义快捷键
+(setq org-todo-keywords
+      '((sequence "TODO(t)" "FEEDBACK(f)" "VERIFY(v)" "|" "DONE(d)")))
+  #+end_src
+- 如果要在 todo 项状态发生变化时记录时间，那么可以设置 org-log-done 变量，例如:
+  #+begin_src emacs-lisp
+(setq org-log-done 'time)
+;; 也可以添加自定义文本
+(setq org-log-done 'note)
+  #+end_src
+- <S-UP> / <S-DOWN> 可以用来切换 todo 项的优先级，只有 A-C 三个优先级
+- 如果有子任务，可以再总任务标题后添加[/]或者[%]，来统计任务的总体进度
+
+*** todo 测试样例
+**** DONE test todo item
+CLOSED: [2022-05-23 一 15:31]
+**** TODO t_itme_2 [0/2]
+***** TODO [#A] Call people [25%]
+****** TODO Peter
+****** TODO Sarah
+****** DONE mama
+CLOSED: [2022-05-23 一 15:39]
+****** IDEA baba
+***** TODO [#B] t_item_3 [2/3]
+****** [ ] haha
+****** [X] xixi
+****** [X] hehe
+**   TAG 标签
+- <C-c C-q>添加 tag
+- 在标题最后面添加:tag:来表示标签
+** 属性
+- <C-c C-x p> 在标题下添加属性

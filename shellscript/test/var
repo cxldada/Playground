@@ -1,0 +1,19 @@
+#!/bin/bash
+# display user information from the system.
+
+echo "User info for userid: $USER"
+echo UID: $UID
+echo HOME: $HOME
+
+curdate=`date`
+curdate2=$(date +%y%m%d)
+echo curdate: $curdate
+echo curdate2: $curdate2
+
+# ls /usr/bin -al > log.$curdate2
+
+if grep cxldada /etc/passwd
+then
+    echo $?
+    echo hahahahahaha
+fi

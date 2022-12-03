@@ -1,0 +1,415 @@
+#+STARTUP: overview
+
+* 创建脚本文件
+** 在创建 shell 脚本文件时，必须在文件的第一行指定要使用的 shell。
+#+begin_src shell
+#!/bin/bash
+#+end_src
+** 写完脚本后有两种方式调用。
+1. 把脚本文件作为参数调用 shell
+2. 给脚本添加执行权限
+** 使用 echo 打印消息
+echo 打印的内容会单独占一行，如果希望和后面的一行在同一行显示，可以给 echo 加-n 参数
+** 用户变量
+1. 大小写敏感
+2. 变量名、赋值运算符和值之间不能有空格
+3. 使用变量时要加 '$' 符号。而给变量赋值时不需要加
+4. 将命令执行后输出的信息赋值给变量有两种方式
+   - 反引号字符（`）
+   - $()格式
+** 内联输入重定向
+内联输入符号是<<
+必须要指定一个文本标记来划分输入数据的开始和结尾。任何字符串都可以作为文本标记，但是在数据的开始和结尾文本标记必须一致。例如
+#+begin_src shell
+$ wc << EOF
+$ > test string 1
+$ > test string 2
+$ > test string 3
+$ > EOF
+
+## wc命令会对输入的数据进行行、词和字节数统计
+
+#+end_src
+** 算数运算
+1. 使用 expr 命令执行算数运算。支持加减乘除、与或、大于小于等等
+2. 使用方括号： $[1 + 5]
+3. bash shell 数学运算符只支持整数运算。zshell 支持了完整的浮点运算操作
+4. 如果是 bash shell 需要使用浮点运算的话可以使用下面的 bc 命令
+#+begin_src shell
+#!/bin/bash
+var1=100
+var2=45
+
+# scale用来设置保留小数点位数的。默认是0
+var3=$(echo "scale=4; $var1 / $var2" | bc)
+echo The answer for this is $var3
+
+# The answer for this is 2.2222
+#+end_src
+* 条件语句
+** if-then 语句
+#+begin_src shell
+if command1
+then
+    commands
+elif command2
+then
+    commands
+else
+    commands
+fi
+#+end_src
+*与其他变成语言不同，if 后面的命令如果执行后的错误码是 0 才会执行 then 语句中的命令。如果是其他错误码则不会执行*
+** test 命令
+if-then 语句只能判断命令的退出码，如果想要以其他条件作为判断依据需要使用 test 命令
+也有简化形式: if 后面可以跟一个方括号来检测条件。注意第一个方括号和第二个方括号之前必须要有一个空格，否则会报错
+test 命令和方括号可以判断三种类型的条件：
+1. 数值比较
+   *只能比较整数*
+   - n1 -eq n2：等于判断
+   - n1 -ge n2：大于等于判断
+   - n1 -gt n2：大于判断
+   - n1 -le n2：小于等于判断
+   - n1 -lt n2：小于判断
+   - n1 -ne n2：不等于判断
+2. 字符串比较
+   *使用大于小于符号是记得加转义符号，不然会被认为是重定向符号*
+   - str1 = str2
+   - str1 != str2
+   - str1 < str2
+   - str1 > str2
+   - -n str1：长度是否非 0
+   - -z str1：长度是否为 0
+3. 文件比较
+   - -d file：是否存在并且是一个目录
+   - -e file：是否存在
+   - -f file：是否存在并且是一个文件
+   - -s file：是否存在并且非空
+   - -r file：是否存在并且可读
+   - -w file：是否存在并且可写
+   - -x file：是否存在并且可执行
+   - -O file：是否存在并且属于当前用户所有
+   - -G file：是否存在并且默认组与当前用户相同
+   - file1 -nt file2：file1 是否比 file2 新
+   - file1 -ot file2：file1 是否比 file2 旧
+** 复合条件测试
+1. [  ] && [  ]
+2. [  ] || [  ]
+** if-then 高级特性
+*** 双括号用于数学表达式
+((  ))
+1. 支持变量前置和后置++、--
+2. ! 逻辑非
+3. ~ 位取反
+4. ** 幂运算
+5. << 左位移
+6. >> 右位移
+7. & | 位与 位或
+8. && || 逻辑与 逻辑或
+*** 双方括号用于高级字符串处理
+支持模式匹配
+** cask 语句
+#+begin_src shell
+case var in
+pattern1 | pattern2) commands;;
+pattern3) commands;;
+,*) default commands;;
+esac
+#+end_src
+
+* 循环语句
+** for 循环
+基础格式如下
+#+begin_src shell
+for var in list
+do
+    commands
+done
+#+end_src
+如果要将 do 和 for 语句放在同一行，那么需要加分号
+在 done 后面跟一个管道或输入输出符号，可以把 for 循环中 echo 的内容传送到指定命令或文件
+** 定义 list 中的值
+*** 直接指定值
+#+begin_src shell
+#!/bin/bash
+for test in Alaska Arizona Arknasa California Colorado
+do
+    echo "The next state is $test"
+done
+echo "The last state we visited was $test"
+test=Connecticut
+echo "Wait, now we're visiting $test"
+#+end_src
+*** 从变量读取列表
+#+begin_src shell
+#!/bin/bash
+ # using a variable to hold the list
+list="Alabama Alaska Arizona Arkansas Colorado"
+list=$list" Connecticut"
+for state in $list
+do
+    echo "Have you ever visited $state?"
+done
+#+end_src
+*** 从文件中读取列表
+*** 上面三种方式都是以空格、制表符或换行符作为列表中每个元素的分隔符。
+如果想要修改分隔符，可以修改 IFS 环境变量
+*** 用通配符读取目录
+#+begin_src shell
+for file in /home/cxl/*
+do
+    if [ -d "$file" ]
+    then
+        echo "$file is a directory"
+    elif [ -f "$file" ]
+    then
+        echo "$file is a fiel"
+    fi
+done
+
+#+end_src
+** C 语言风格的 for 循环
+#+begin_src shell
+for (( i=1; i<=10; i++ ))
+do
+    echo "The next number is $i"
+done
+#+end_src
+*** 在这种 for 循环可以指定多个变量，但只能有一个条件语句
+** while 命令
+while 命令允许定义一个要测试的命令，然后执行一组命令，只要定义的测试命令返回的退出状态码为 0 就会继续执行，直到测试命令返回非 0 才终止循环
+#+begin_src shell
+while test command
+do
+    other commands
+done
+#+end_src
+while 语句中的测试语句格式和 if-then 语句中的格式一摸一样。
+while 语句中的测试语句可以指定多条，只有最后一条测试语句会被用于判断循环的终止
+** until 命令
+格式
+#+begin_src shell
+until test commands
+do
+    other commands
+done
+#+end_src
+until 命令与 while 命令正常相反，直到测试命令返回 0 时才会停止
+
+* 处理用户输入
+** 命令行参数
+- $0 是程序名，$1~9 是参数 1~9
+- 如果命令行参数超过 9 个就需要加上花括号。例如：${10}表示第十个参数
+- basename 命令用来获取路径中最后一个分量。常常出来处理$0 中包含的路径名和其他程序名
+- -n 用来测试命令行参数是否存在数据
+** 特殊的参数变量
+- $#表示命令参数的个数
+- ${!#}返回最后一个命令行参数的值
+- $*变量会将命令行上提供的所有参数当作一个单词保存。
+- $@变量会将命令行上提供的所有参数当作一个字符串中的多个独立的单词保存，可以用 for 循环遍历
+** 移动变量
+shift 命令用来移动命令行参数的，默认情况下会将$1 开始往后的命令行参数向前移动一位。$0 永远是命令本身不会被$1 所替换，所以第一个命令行参数随着 shift 的多次调用而被删除掉
+shift 命令将参数移除后，它的值就被丢弃了，无法在恢复
+** 处理选项
+*** getopt 命令
+getopt optstring parameters
+-q 参数用来忽略 optstring 未定义的参数
+在 optstring 中列出要在脚本中用到的每个命令行选项字母。在每个需要参数值的选项字母后面加一个冒号。例如：
+getopt ab:cd -a -b test1 -cd test2 test3
+-a -b test1 -c -d -- test2 test3
+会被解释成有 a、b、c、d 四个参数，其中 b 是有参数值值的
+*** 在脚本中使用 getopt 命令
+set 命令的选项之一是双破折号，他会将命令行参数替换成 set 命令的命令行值。
+然后，该方法会将原始脚本的命令行参数传递给 getopt 命令，之后再将 getopt 命令的输出传入给 set 命令，用 getopt 格式化后的命令行参数来替换原始的命令行参数。例如
+set -- $(getopt -q ab:cd "$@")
+
+*** getopts 命令
+命令格式: getopts optstring variable
+optstring 和 getopt 那个一样。如果需要错误信息的话不是加-q 参数而是在 optstring 最前面加一个冒号。
+这个命令会把处理的结果存储到 variable 中
+getopts 会用到两个环境变量：
+1. OPTARG 环境变量用来保存选项后面跟着的值
+2. OPTIND 环境变量用来保存参数列表中 getopts 正在处理的参数位置
+#+begin_src shell
+echo
+while getopts :ab:cd opt
+do
+    case "$opt" in
+        a) echo "Found the -a option" ;;
+        b) echo "Found the -b option, with value $OPTARG" ;;
+        c) echo "Found the -c option" ;;
+        d) echo "Found the -d option" ;;
+        ,*) echo "Unknown option: $opt" ;;
+    esac
+done
+
+shift $[ $OPTIND - 1 ]
+
+echo
+count=1
+for param in "$@"
+do
+    echo "Parameter $count: $param"
+    count=$[ $count + 1 ]
+done
+#+end_src
+** 基本的读取
+read 命令
+-p 参数用来输入提示语
+-t 参数用来设置超时秒数
+-n1 设置输入的字符长度
+-s 不回显字符
+高级用法：从文件中读取
+#+begin_src shell
+count=1
+cat filename | while read line
+do
+    echo "Line $count: $line"
+    count=$[ $count + 1 ]
+done
+echo "Finished processing the file"
+#+end_src
+
+* 呈现数据
+- 1> 重定向输出
+- 2> 重定向错误
+- &> 同时重定向输入和错误
+** 在脚本中重定向输出
+- `>&2` 将文本输出到标准错误，而不是标准输出
+- `exec 1>testout` 将脚本中所有文本输出重定向到 testout 文件中
+- `exec 3>&-` 关闭打开的文件描述符
+** 列出打开的文件描述符
+lsof 命令会显示当前系统上打开的每个文件的有关信息
+-p 参数可以指定进程，$$符号表示当前进程 ID
+-d 参数可以指定文件描述符
+-a 参数将前面两个参数的结果结合起来
+** 创建临时文件
+mktemp 命令会在当前目录中创建一个唯一的临时文件。
+shell 会创建这个文件，但不用默认的 umask 值。它回将文件的读和写权限分配给文件属主，并将调用者设置为属主
+-t 参数强制在/tmp 目录下创建临时文件
+-d 参数用来创建临时目录而不是临时文件
+** 记录消息
+tee 命令相当于管道的一个 T 型接头，它将从 STDIN 过来的数据同时发往两处。一处是 STDOUT，另一处是 tee 命令所指定的文件名
+-a 参数修改为追加模式
+
+* 控制脚本
+** 捕获信号
+trap 命令用来捕获信号
+trap commands signals
+commands 是捕获到指定信号后要执行的命令
+signals 是一组用空格分开的待补货信号，可以是数值也可以是 Linux 信号名
+重新使用这个命令可以修改信号捕获后的行为
+将 commands 设置为--可以删除之前设置的捕获行为
+将 commands 设置为-可以将捕获行为恢复成默认行为
+** 后台运行脚本
+在执行脚本命令的后方加一个&表示在后台执行
+使用 nohup 命令可以让脚本在后台运行，并且在断开会话时脚本可以继续执行。
+** 调整谦让度
+调度优先级是一个整数值。从-20（最高优先级）到+19（最低优先级）。
+默认情况下，bash 会以优先级 0 来启动所有进程
+nice 命令用来降低命令的优先级。-n 参数指定数字。只有 root 账户可以提高优先级
+renice 命令用来降低执行中的命令的优先级。-n 参数制定数字，-p 参数指定进程 IP。只有 root 账户可以提高优先级
+** 定时执行任务
+*** at 命令
+at [-f filename] time
+time 支持的格式：
+1. 标准的小时和分钟格式。10:15
+2. AM/PM 指示符。10:15 PM
+3. 特定可命名时间。now、noon、midnight 或者 teatime(4 PM)
+4. 还可以设置增量。+25min（25 分钟后）或者 10:15+7 七天后的 10:15
+at 命令回将输出通过邮件发送到调用者的邮箱中，如果执行环境中没有 sendmail 应用程序，那么就不会收到任何信息
+atq 命令查看等待执行的作业
+atrm 命令删除等待中的作业
+*** cron
+cron 表的格式
+min hour dayofmonth month dayofweek command
+如何在每个月的最后一天执行命令？
+00 12 * * * if [ `date +%d -d tommorrow` = 01 ]; then ; command
+如果脚本对精确的执行时间要求不高，那么可以把脚本放在/etc/cron.*目录下执行会很方便
+
+* 函数
+** 创建函数
+#+begin_src shell
+function name {
+    commands
+}
+
+name() {
+    commands
+}
+#+end_src
+** 函数返回值
+bash shell 会把函数当作一个小型脚本，运行结束时返回一个退出状态码。有三种不同的方法来为函数生成退出状态码
+*** 默认退出状态码
+返回函数中最后一个命令的状态码作为函数状态码
+*** return 语句
+使用这种方式从函数中返回值时，要注意下面两个问题：
+1. 函数已结束就取返回值
+2. 退出状态码必须是 0～255
+*** 函数输出
+将函数的返回值输出，并将输出赋值给变量即可
+** 在函数中使用变量
+函数回被当作一个小型脚本执行，所以函数的参数使用方式和脚本的参数一样
+*** 全局变量
+在脚本内函数外定义的变量都是全局变量
+*** 局部变量
+local 使函数内的变量变为局部变量
+** 给函数传递数组
+#+begin_src shell
+function testit {
+    local newarray
+    newarray=(;'echo "$@')
+    echo "The new array value is: ${newarray[*]}"
+}
+myarray=(1 2 3 4 5)
+echo "The original array is ${myarray[*]}"
+testit ${myarray[*]}
+#+end_src
+
+#+begin_src shell
+function addarray {
+    local sum=0
+    local newarray
+    newarray=($(echo "$@"))
+    for value in ${newarray[*]}
+    do
+        sum=$[ $sum + $value ]
+    done
+    echo $sum
+}
+
+myarray=(1 2 3 4 5)
+echo "The original array is: ${myarray[*]}"
+arg1=$(echo ${myarray[*]})
+result=$(addarray $arg1)
+echo "The result is $result"
+#+end_src
+** 从函数返回数组
+#+begin_src shell
+function arraydblr {
+    local origarray
+    local newarray
+    local elements
+    local i
+    origarray=($(echo "$@"))
+    newarray=($(echo "$@"))
+    elements=$[ $# - 1 ]
+    for (( i=0; i <= $elements; i++ ))
+    {
+        newarray[ $i ]=$[ ${origarray[ $i ]} * 2 ]
+    }
+    echo ${newarray[*]}
+}
+
+myarray=(1 2 3 4 5)
+echo "The original array is: ${myarray[*]}"
+arg1=$(echo ${myarrah[*]})
+result=($(arraydblr $arg1))
+echo "The new array is: ${result[*]}"
+#+end_src
+** 引入库文件
+使用 source 命令将库文件引入当前脚本。
+source 命令有个别名 `.`
+** 在命令行中使用函数
+*** 直接在命令行中定义函数
+*** 在.bashrc 文件中定义函数

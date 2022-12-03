@@ -1,0 +1,1212 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.1.0 #12072 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -mmcs51 --model-small
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _Nixie_PARM_2
+                                     12 	.globl _main
+                                     13 	.globl _LCD_ShowBinNum
+                                     14 	.globl _LCD_ShowHexNum
+                                     15 	.globl _LCD_ShowSignedNum
+                                     16 	.globl _LCD_ShowNum
+                                     17 	.globl _LCD_Pow
+                                     18 	.globl _LCD_ShowString
+                                     19 	.globl _LCD_ShowChar
+                                     20 	.globl _LCD_Init
+                                     21 	.globl _LCD_SetCursor
+                                     22 	.globl _LCD_WriteData
+                                     23 	.globl _LCD_WriteCommand
+                                     24 	.globl _LCD_Delay
+                                     25 	.globl _Nixie
+                                     26 	.globl _delay
+                                     27 	.globl _TF2
+                                     28 	.globl _EXF2
+                                     29 	.globl _RCLK
+                                     30 	.globl _TCLK
+                                     31 	.globl _EXEN2
+                                     32 	.globl _TR2
+                                     33 	.globl _C_T2
+                                     34 	.globl _CP_RL2
+                                     35 	.globl _T2CON_7
+                                     36 	.globl _T2CON_6
+                                     37 	.globl _T2CON_5
+                                     38 	.globl _T2CON_4
+                                     39 	.globl _T2CON_3
+                                     40 	.globl _T2CON_2
+                                     41 	.globl _T2CON_1
+                                     42 	.globl _T2CON_0
+                                     43 	.globl _PT2
+                                     44 	.globl _ET2
+                                     45 	.globl _CY
+                                     46 	.globl _AC
+                                     47 	.globl _F0
+                                     48 	.globl _RS1
+                                     49 	.globl _RS0
+                                     50 	.globl _OV
+                                     51 	.globl _F1
+                                     52 	.globl _P
+                                     53 	.globl _PS
+                                     54 	.globl _PT1
+                                     55 	.globl _PX1
+                                     56 	.globl _PT0
+                                     57 	.globl _PX0
+                                     58 	.globl _RD
+                                     59 	.globl _WR
+                                     60 	.globl _T1
+                                     61 	.globl _T0
+                                     62 	.globl _INT1
+                                     63 	.globl _INT0
+                                     64 	.globl _TXD
+                                     65 	.globl _RXD
+                                     66 	.globl _P3_7
+                                     67 	.globl _P3_6
+                                     68 	.globl _P3_5
+                                     69 	.globl _P3_4
+                                     70 	.globl _P3_3
+                                     71 	.globl _P3_2
+                                     72 	.globl _P3_1
+                                     73 	.globl _P3_0
+                                     74 	.globl _EA
+                                     75 	.globl _ES
+                                     76 	.globl _ET1
+                                     77 	.globl _EX1
+                                     78 	.globl _ET0
+                                     79 	.globl _EX0
+                                     80 	.globl _P2_7
+                                     81 	.globl _P2_6
+                                     82 	.globl _P2_5
+                                     83 	.globl _P2_4
+                                     84 	.globl _P2_3
+                                     85 	.globl _P2_2
+                                     86 	.globl _P2_1
+                                     87 	.globl _P2_0
+                                     88 	.globl _SM0
+                                     89 	.globl _SM1
+                                     90 	.globl _SM2
+                                     91 	.globl _REN
+                                     92 	.globl _TB8
+                                     93 	.globl _RB8
+                                     94 	.globl _TI
+                                     95 	.globl _RI
+                                     96 	.globl _P1_7
+                                     97 	.globl _P1_6
+                                     98 	.globl _P1_5
+                                     99 	.globl _P1_4
+                                    100 	.globl _P1_3
+                                    101 	.globl _P1_2
+                                    102 	.globl _P1_1
+                                    103 	.globl _P1_0
+                                    104 	.globl _TF1
+                                    105 	.globl _TR1
+                                    106 	.globl _TF0
+                                    107 	.globl _TR0
+                                    108 	.globl _IE1
+                                    109 	.globl _IT1
+                                    110 	.globl _IE0
+                                    111 	.globl _IT0
+                                    112 	.globl _P0_7
+                                    113 	.globl _P0_6
+                                    114 	.globl _P0_5
+                                    115 	.globl _P0_4
+                                    116 	.globl _P0_3
+                                    117 	.globl _P0_2
+                                    118 	.globl _P0_1
+                                    119 	.globl _P0_0
+                                    120 	.globl _TH2
+                                    121 	.globl _TL2
+                                    122 	.globl _RCAP2H
+                                    123 	.globl _RCAP2L
+                                    124 	.globl _T2CON
+                                    125 	.globl _B
+                                    126 	.globl _ACC
+                                    127 	.globl _PSW
+                                    128 	.globl _IP
+                                    129 	.globl _P3
+                                    130 	.globl _IE
+                                    131 	.globl _P2
+                                    132 	.globl _SBUF
+                                    133 	.globl _SCON
+                                    134 	.globl _P1
+                                    135 	.globl _TH1
+                                    136 	.globl _TH0
+                                    137 	.globl _TL1
+                                    138 	.globl _TL0
+                                    139 	.globl _TMOD
+                                    140 	.globl _TCON
+                                    141 	.globl _PCON
+                                    142 	.globl _DPH
+                                    143 	.globl _DPL
+                                    144 	.globl _SP
+                                    145 	.globl _P0
+                                    146 	.globl _LCD_ShowBinNum_PARM_4
+                                    147 	.globl _LCD_ShowBinNum_PARM_3
+                                    148 	.globl _LCD_ShowBinNum_PARM_2
+                                    149 	.globl _LCD_ShowHexNum_PARM_4
+                                    150 	.globl _LCD_ShowHexNum_PARM_3
+                                    151 	.globl _LCD_ShowHexNum_PARM_2
+                                    152 	.globl _LCD_ShowSignedNum_PARM_4
+                                    153 	.globl _LCD_ShowSignedNum_PARM_3
+                                    154 	.globl _LCD_ShowSignedNum_PARM_2
+                                    155 	.globl _LCD_ShowNum_PARM_4
+                                    156 	.globl _LCD_ShowNum_PARM_3
+                                    157 	.globl _LCD_ShowNum_PARM_2
+                                    158 	.globl _LCD_Pow_PARM_2
+                                    159 	.globl _LCD_ShowString_PARM_3
+                                    160 	.globl _LCD_ShowString_PARM_2
+                                    161 	.globl _LCD_ShowChar_PARM_3
+                                    162 	.globl _LCD_ShowChar_PARM_2
+                                    163 	.globl _LCD_SetCursor_PARM_2
+                                    164 	.globl _NixieTable
+                                    165 ;--------------------------------------------------------
+                                    166 ; special function registers
+                                    167 ;--------------------------------------------------------
+                                    168 	.area RSEG    (ABS,DATA)
+      000000                        169 	.org 0x0000
+                           000080   170 _P0	=	0x0080
+                           000081   171 _SP	=	0x0081
+                           000082   172 _DPL	=	0x0082
+                           000083   173 _DPH	=	0x0083
+                           000087   174 _PCON	=	0x0087
+                           000088   175 _TCON	=	0x0088
+                           000089   176 _TMOD	=	0x0089
+                           00008A   177 _TL0	=	0x008a
+                           00008B   178 _TL1	=	0x008b
+                           00008C   179 _TH0	=	0x008c
+                           00008D   180 _TH1	=	0x008d
+                           000090   181 _P1	=	0x0090
+                           000098   182 _SCON	=	0x0098
+                           000099   183 _SBUF	=	0x0099
+                           0000A0   184 _P2	=	0x00a0
+                           0000A8   185 _IE	=	0x00a8
+                           0000B0   186 _P3	=	0x00b0
+                           0000B8   187 _IP	=	0x00b8
+                           0000D0   188 _PSW	=	0x00d0
+                           0000E0   189 _ACC	=	0x00e0
+                           0000F0   190 _B	=	0x00f0
+                           0000C8   191 _T2CON	=	0x00c8
+                           0000CA   192 _RCAP2L	=	0x00ca
+                           0000CB   193 _RCAP2H	=	0x00cb
+                           0000CC   194 _TL2	=	0x00cc
+                           0000CD   195 _TH2	=	0x00cd
+                                    196 ;--------------------------------------------------------
+                                    197 ; special function bits
+                                    198 ;--------------------------------------------------------
+                                    199 	.area RSEG    (ABS,DATA)
+      000000                        200 	.org 0x0000
+                           000080   201 _P0_0	=	0x0080
+                           000081   202 _P0_1	=	0x0081
+                           000082   203 _P0_2	=	0x0082
+                           000083   204 _P0_3	=	0x0083
+                           000084   205 _P0_4	=	0x0084
+                           000085   206 _P0_5	=	0x0085
+                           000086   207 _P0_6	=	0x0086
+                           000087   208 _P0_7	=	0x0087
+                           000088   209 _IT0	=	0x0088
+                           000089   210 _IE0	=	0x0089
+                           00008A   211 _IT1	=	0x008a
+                           00008B   212 _IE1	=	0x008b
+                           00008C   213 _TR0	=	0x008c
+                           00008D   214 _TF0	=	0x008d
+                           00008E   215 _TR1	=	0x008e
+                           00008F   216 _TF1	=	0x008f
+                           000090   217 _P1_0	=	0x0090
+                           000091   218 _P1_1	=	0x0091
+                           000092   219 _P1_2	=	0x0092
+                           000093   220 _P1_3	=	0x0093
+                           000094   221 _P1_4	=	0x0094
+                           000095   222 _P1_5	=	0x0095
+                           000096   223 _P1_6	=	0x0096
+                           000097   224 _P1_7	=	0x0097
+                           000098   225 _RI	=	0x0098
+                           000099   226 _TI	=	0x0099
+                           00009A   227 _RB8	=	0x009a
+                           00009B   228 _TB8	=	0x009b
+                           00009C   229 _REN	=	0x009c
+                           00009D   230 _SM2	=	0x009d
+                           00009E   231 _SM1	=	0x009e
+                           00009F   232 _SM0	=	0x009f
+                           0000A0   233 _P2_0	=	0x00a0
+                           0000A1   234 _P2_1	=	0x00a1
+                           0000A2   235 _P2_2	=	0x00a2
+                           0000A3   236 _P2_3	=	0x00a3
+                           0000A4   237 _P2_4	=	0x00a4
+                           0000A5   238 _P2_5	=	0x00a5
+                           0000A6   239 _P2_6	=	0x00a6
+                           0000A7   240 _P2_7	=	0x00a7
+                           0000A8   241 _EX0	=	0x00a8
+                           0000A9   242 _ET0	=	0x00a9
+                           0000AA   243 _EX1	=	0x00aa
+                           0000AB   244 _ET1	=	0x00ab
+                           0000AC   245 _ES	=	0x00ac
+                           0000AF   246 _EA	=	0x00af
+                           0000B0   247 _P3_0	=	0x00b0
+                           0000B1   248 _P3_1	=	0x00b1
+                           0000B2   249 _P3_2	=	0x00b2
+                           0000B3   250 _P3_3	=	0x00b3
+                           0000B4   251 _P3_4	=	0x00b4
+                           0000B5   252 _P3_5	=	0x00b5
+                           0000B6   253 _P3_6	=	0x00b6
+                           0000B7   254 _P3_7	=	0x00b7
+                           0000B0   255 _RXD	=	0x00b0
+                           0000B1   256 _TXD	=	0x00b1
+                           0000B2   257 _INT0	=	0x00b2
+                           0000B3   258 _INT1	=	0x00b3
+                           0000B4   259 _T0	=	0x00b4
+                           0000B5   260 _T1	=	0x00b5
+                           0000B6   261 _WR	=	0x00b6
+                           0000B7   262 _RD	=	0x00b7
+                           0000B8   263 _PX0	=	0x00b8
+                           0000B9   264 _PT0	=	0x00b9
+                           0000BA   265 _PX1	=	0x00ba
+                           0000BB   266 _PT1	=	0x00bb
+                           0000BC   267 _PS	=	0x00bc
+                           0000D0   268 _P	=	0x00d0
+                           0000D1   269 _F1	=	0x00d1
+                           0000D2   270 _OV	=	0x00d2
+                           0000D3   271 _RS0	=	0x00d3
+                           0000D4   272 _RS1	=	0x00d4
+                           0000D5   273 _F0	=	0x00d5
+                           0000D6   274 _AC	=	0x00d6
+                           0000D7   275 _CY	=	0x00d7
+                           0000AD   276 _ET2	=	0x00ad
+                           0000BD   277 _PT2	=	0x00bd
+                           0000C8   278 _T2CON_0	=	0x00c8
+                           0000C9   279 _T2CON_1	=	0x00c9
+                           0000CA   280 _T2CON_2	=	0x00ca
+                           0000CB   281 _T2CON_3	=	0x00cb
+                           0000CC   282 _T2CON_4	=	0x00cc
+                           0000CD   283 _T2CON_5	=	0x00cd
+                           0000CE   284 _T2CON_6	=	0x00ce
+                           0000CF   285 _T2CON_7	=	0x00cf
+                           0000C8   286 _CP_RL2	=	0x00c8
+                           0000C9   287 _C_T2	=	0x00c9
+                           0000CA   288 _TR2	=	0x00ca
+                           0000CB   289 _EXEN2	=	0x00cb
+                           0000CC   290 _TCLK	=	0x00cc
+                           0000CD   291 _RCLK	=	0x00cd
+                           0000CE   292 _EXF2	=	0x00ce
+                           0000CF   293 _TF2	=	0x00cf
+                                    294 ;--------------------------------------------------------
+                                    295 ; overlayable register banks
+                                    296 ;--------------------------------------------------------
+                                    297 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        298 	.ds 8
+                                    299 ;--------------------------------------------------------
+                                    300 ; internal ram data
+                                    301 ;--------------------------------------------------------
+                                    302 	.area DSEG    (DATA)
+      000000                        303 _NixieTable::
+      000000                        304 	.ds 17
+      000011                        305 _LCD_SetCursor_PARM_2:
+      000011                        306 	.ds 1
+      000012                        307 _LCD_ShowChar_PARM_2:
+      000012                        308 	.ds 1
+      000013                        309 _LCD_ShowChar_PARM_3:
+      000013                        310 	.ds 1
+      000014                        311 _LCD_ShowString_PARM_2:
+      000014                        312 	.ds 1
+      000015                        313 _LCD_ShowString_PARM_3:
+      000015                        314 	.ds 3
+      000018                        315 _LCD_Pow_PARM_2:
+      000018                        316 	.ds 2
+      00001A                        317 _LCD_ShowNum_PARM_2:
+      00001A                        318 	.ds 1
+      00001B                        319 _LCD_ShowNum_PARM_3:
+      00001B                        320 	.ds 2
+      00001D                        321 _LCD_ShowNum_PARM_4:
+      00001D                        322 	.ds 1
+      00001E                        323 _LCD_ShowSignedNum_PARM_2:
+      00001E                        324 	.ds 1
+      00001F                        325 _LCD_ShowSignedNum_PARM_3:
+      00001F                        326 	.ds 2
+      000021                        327 _LCD_ShowSignedNum_PARM_4:
+      000021                        328 	.ds 1
+      000022                        329 _LCD_ShowHexNum_PARM_2:
+      000022                        330 	.ds 1
+      000023                        331 _LCD_ShowHexNum_PARM_3:
+      000023                        332 	.ds 2
+      000025                        333 _LCD_ShowHexNum_PARM_4:
+      000025                        334 	.ds 1
+      000026                        335 _LCD_ShowBinNum_PARM_2:
+      000026                        336 	.ds 1
+      000027                        337 _LCD_ShowBinNum_PARM_3:
+      000027                        338 	.ds 2
+      000029                        339 _LCD_ShowBinNum_PARM_4:
+      000029                        340 	.ds 1
+                                    341 ;--------------------------------------------------------
+                                    342 ; overlayable items in internal ram 
+                                    343 ;--------------------------------------------------------
+                                    344 	.area	OSEG    (OVR,DATA)
+                                    345 	.area	OSEG    (OVR,DATA)
+      000000                        346 _Nixie_PARM_2:
+      000000                        347 	.ds 1
+                                    348 	.area	OSEG    (OVR,DATA)
+                                    349 ;--------------------------------------------------------
+                                    350 ; Stack segment in internal ram 
+                                    351 ;--------------------------------------------------------
+                                    352 	.area	SSEG
+      000000                        353 __start__stack:
+      000000                        354 	.ds	1
+                                    355 
+                                    356 ;--------------------------------------------------------
+                                    357 ; indirectly addressable internal ram data
+                                    358 ;--------------------------------------------------------
+                                    359 	.area ISEG    (DATA)
+                                    360 ;--------------------------------------------------------
+                                    361 ; absolute internal ram data
+                                    362 ;--------------------------------------------------------
+                                    363 	.area IABS    (ABS,DATA)
+                                    364 	.area IABS    (ABS,DATA)
+                                    365 ;--------------------------------------------------------
+                                    366 ; bit data
+                                    367 ;--------------------------------------------------------
+                                    368 	.area BSEG    (BIT)
+                                    369 ;--------------------------------------------------------
+                                    370 ; paged external ram data
+                                    371 ;--------------------------------------------------------
+                                    372 	.area PSEG    (PAG,XDATA)
+                                    373 ;--------------------------------------------------------
+                                    374 ; external ram data
+                                    375 ;--------------------------------------------------------
+                                    376 	.area XSEG    (XDATA)
+                                    377 ;--------------------------------------------------------
+                                    378 ; absolute external ram data
+                                    379 ;--------------------------------------------------------
+                                    380 	.area XABS    (ABS,XDATA)
+                                    381 ;--------------------------------------------------------
+                                    382 ; external initialized ram data
+                                    383 ;--------------------------------------------------------
+                                    384 	.area XISEG   (XDATA)
+                                    385 	.area HOME    (CODE)
+                                    386 	.area GSINIT0 (CODE)
+                                    387 	.area GSINIT1 (CODE)
+                                    388 	.area GSINIT2 (CODE)
+                                    389 	.area GSINIT3 (CODE)
+                                    390 	.area GSINIT4 (CODE)
+                                    391 	.area GSINIT5 (CODE)
+                                    392 	.area GSINIT  (CODE)
+                                    393 	.area GSFINAL (CODE)
+                                    394 	.area CSEG    (CODE)
+                                    395 ;--------------------------------------------------------
+                                    396 ; interrupt vector 
+                                    397 ;--------------------------------------------------------
+                                    398 	.area HOME    (CODE)
+      000000                        399 __interrupt_vect:
+      000000 02r00r00         [24]  400 	ljmp	__sdcc_gsinit_startup
+                                    401 ;--------------------------------------------------------
+                                    402 ; global & static initialisations
+                                    403 ;--------------------------------------------------------
+                                    404 	.area HOME    (CODE)
+                                    405 	.area GSINIT  (CODE)
+                                    406 	.area GSFINAL (CODE)
+                                    407 	.area GSINIT  (CODE)
+                                    408 	.globl __sdcc_gsinit_startup
+                                    409 	.globl __sdcc_program_startup
+                                    410 	.globl __start__stack
+                                    411 	.globl __mcs51_genXINIT
+                                    412 	.globl __mcs51_genXRAMCLEAR
+                                    413 	.globl __mcs51_genRAMCLEAR
+                                    414 ;	../include/tools.h:26: unsigned char NixieTable[] = {0x3F, 0x06, 0x5B, 0x4f, 0x66, 0x6D,
+      000000 75*00 3F         [24]  415 	mov	_NixieTable,#0x3f
+      000003 75*01 06         [24]  416 	mov	(_NixieTable + 0x0001),#0x06
+      000006 75*02 5B         [24]  417 	mov	(_NixieTable + 0x0002),#0x5b
+      000009 75*03 4F         [24]  418 	mov	(_NixieTable + 0x0003),#0x4f
+      00000C 75*04 66         [24]  419 	mov	(_NixieTable + 0x0004),#0x66
+      00000F 75*05 6D         [24]  420 	mov	(_NixieTable + 0x0005),#0x6d
+      000012 75*06 7D         [24]  421 	mov	(_NixieTable + 0x0006),#0x7d
+      000015 75*07 07         [24]  422 	mov	(_NixieTable + 0x0007),#0x07
+      000018 75*08 7F         [24]  423 	mov	(_NixieTable + 0x0008),#0x7f
+      00001B 75*09 6F         [24]  424 	mov	(_NixieTable + 0x0009),#0x6f
+      00001E 75*0A 77         [24]  425 	mov	(_NixieTable + 0x000a),#0x77
+      000021 75*0B 7C         [24]  426 	mov	(_NixieTable + 0x000b),#0x7c
+      000024 75*0C 39         [24]  427 	mov	(_NixieTable + 0x000c),#0x39
+      000027 75*0D 5E         [24]  428 	mov	(_NixieTable + 0x000d),#0x5e
+      00002A 75*0E 79         [24]  429 	mov	(_NixieTable + 0x000e),#0x79
+      00002D 75*0F 71         [24]  430 	mov	(_NixieTable + 0x000f),#0x71
+      000030 75*10 00         [24]  431 	mov	(_NixieTable + 0x0010),#0x00
+                                    432 	.area GSFINAL (CODE)
+      000000 02r00r03         [24]  433 	ljmp	__sdcc_program_startup
+                                    434 ;--------------------------------------------------------
+                                    435 ; Home
+                                    436 ;--------------------------------------------------------
+                                    437 	.area HOME    (CODE)
+                                    438 	.area HOME    (CODE)
+      000003                        439 __sdcc_program_startup:
+      000003 02r02rDB         [24]  440 	ljmp	_main
+                                    441 ;	return from main will return to caller
+                                    442 ;--------------------------------------------------------
+                                    443 ; code
+                                    444 ;--------------------------------------------------------
+                                    445 	.area CSEG    (CODE)
+                                    446 ;------------------------------------------------------------
+                                    447 ;Allocation info for local variables in function 'delay'
+                                    448 ;------------------------------------------------------------
+                                    449 ;ms                        Allocated to registers 
+                                    450 ;i                         Allocated to registers r4 
+                                    451 ;j                         Allocated to registers r5 
+                                    452 ;------------------------------------------------------------
+                                    453 ;	../include/tools.h:6: void delay(unsigned int ms) {
+                                    454 ;	-----------------------------------------
+                                    455 ;	 function delay
+                                    456 ;	-----------------------------------------
+      000000                        457 _delay:
+                           000007   458 	ar7 = 0x07
+                           000006   459 	ar6 = 0x06
+                           000005   460 	ar5 = 0x05
+                           000004   461 	ar4 = 0x04
+                           000003   462 	ar3 = 0x03
+                           000002   463 	ar2 = 0x02
+                           000001   464 	ar1 = 0x01
+                           000000   465 	ar0 = 0x00
+      000000 AE 82            [24]  466 	mov	r6,dpl
+      000002 AF 83            [24]  467 	mov	r7,dph
+                                    468 ;	../include/tools.h:9: while (ms--) {
+      000004                        469 00107$:
+      000004 8E 04            [24]  470 	mov	ar4,r6
+      000006 8F 05            [24]  471 	mov	ar5,r7
+      000008 1E               [12]  472 	dec	r6
+      000009 BE FF 01         [24]  473 	cjne	r6,#0xff,00134$
+      00000C 1F               [12]  474 	dec	r7
+      00000D                        475 00134$:
+      00000D EC               [12]  476 	mov	a,r4
+      00000E 4D               [12]  477 	orl	a,r5
+      00000F 60 0A            [24]  478 	jz	00110$
+                                    479 ;	../include/tools.h:13: while (--j)
+      000011 7D EF            [12]  480 	mov	r5,#0xef
+      000013 7C 02            [12]  481 	mov	r4,#0x02
+      000015                        482 00101$:
+      000015 DD FE            [24]  483 	djnz	r5,00101$
+                                    484 ;	../include/tools.h:15: } while (--i);
+      000017 DC FC            [24]  485 	djnz	r4,00101$
+      000019 80 E9            [24]  486 	sjmp	00107$
+      00001B                        487 00110$:
+                                    488 ;	../include/tools.h:17: }
+      00001B 22               [24]  489 	ret
+                                    490 ;------------------------------------------------------------
+                                    491 ;Allocation info for local variables in function 'Nixie'
+                                    492 ;------------------------------------------------------------
+                                    493 ;number                    Allocated with name '_Nixie_PARM_2'
+                                    494 ;localtion                 Allocated to registers r7 
+                                    495 ;------------------------------------------------------------
+                                    496 ;	../include/tools.h:29: void Nixie(unsigned char localtion, unsigned char number) {
+                                    497 ;	-----------------------------------------
+                                    498 ;	 function Nixie
+                                    499 ;	-----------------------------------------
+      00001C                        500 _Nixie:
+                                    501 ;	../include/tools.h:30: switch (localtion) {
+      00001C E5 82            [12]  502 	mov	a,dpl
+      00001E FF               [12]  503 	mov	r7,a
+      00001F 24 F7            [12]  504 	add	a,#0xff - 0x08
+      000021 50 03            [24]  505 	jnc	00116$
+      000023 02r00r84         [24]  506 	ljmp	00109$
+      000026                        507 00116$:
+      000026 EF               [12]  508 	mov	a,r7
+      000027 24 0A            [12]  509 	add	a,#(00117$-3-.)
+      000029 83               [24]  510 	movc	a,@a+pc
+      00002A F5 82            [12]  511 	mov	dpl,a
+      00002C EF               [12]  512 	mov	a,r7
+      00002D 24 0D            [12]  513 	add	a,#(00118$-3-.)
+      00002F 83               [24]  514 	movc	a,@a+pc
+      000030 F5 83            [12]  515 	mov	dph,a
+      000032 E4               [12]  516 	clr	a
+      000033 73               [24]  517 	jmp	@a+dptr
+      000034                        518 00117$:
+      000034r84                     519 	.db	00109$
+      000035r46                     520 	.db	00101$
+      000036r4E                     521 	.db	00102$
+      000037r56                     522 	.db	00103$
+      000038r5E                     523 	.db	00104$
+      000039r66                     524 	.db	00105$
+      00003Ar6E                     525 	.db	00106$
+      00003Br76                     526 	.db	00107$
+      00003Cr7E                     527 	.db	00108$
+      00003D                        528 00118$:
+      00003Ds00                     529 	.db	00109$>>8
+      00003Es00                     530 	.db	00101$>>8
+      00003Fs00                     531 	.db	00102$>>8
+      000040s00                     532 	.db	00103$>>8
+      000041s00                     533 	.db	00104$>>8
+      000042s00                     534 	.db	00105$>>8
+      000043s00                     535 	.db	00106$>>8
+      000044s00                     536 	.db	00107$>>8
+      000045s00                     537 	.db	00108$>>8
+                                    538 ;	../include/tools.h:31: case 1: {
+      000046                        539 00101$:
+                                    540 ;	../include/tools.h:32: P2_4 = 1;
+                                    541 ;	assignBit
+      000046 D2 A4            [12]  542 	setb	_P2_4
+                                    543 ;	../include/tools.h:33: P2_3 = 1;
+                                    544 ;	assignBit
+      000048 D2 A3            [12]  545 	setb	_P2_3
+                                    546 ;	../include/tools.h:34: P2_2 = 1;
+                                    547 ;	assignBit
+      00004A D2 A2            [12]  548 	setb	_P2_2
+                                    549 ;	../include/tools.h:35: break;
+                                    550 ;	../include/tools.h:37: case 2: {
+      00004C 80 36            [24]  551 	sjmp	00109$
+      00004E                        552 00102$:
+                                    553 ;	../include/tools.h:38: P2_4 = 1;
+                                    554 ;	assignBit
+      00004E D2 A4            [12]  555 	setb	_P2_4
+                                    556 ;	../include/tools.h:39: P2_3 = 1;
+                                    557 ;	assignBit
+      000050 D2 A3            [12]  558 	setb	_P2_3
+                                    559 ;	../include/tools.h:40: P2_2 = 0;
+                                    560 ;	assignBit
+      000052 C2 A2            [12]  561 	clr	_P2_2
+                                    562 ;	../include/tools.h:41: break;
+                                    563 ;	../include/tools.h:43: case 3: {
+      000054 80 2E            [24]  564 	sjmp	00109$
+      000056                        565 00103$:
+                                    566 ;	../include/tools.h:44: P2_4 = 1;
+                                    567 ;	assignBit
+      000056 D2 A4            [12]  568 	setb	_P2_4
+                                    569 ;	../include/tools.h:45: P2_3 = 0;
+                                    570 ;	assignBit
+      000058 C2 A3            [12]  571 	clr	_P2_3
+                                    572 ;	../include/tools.h:46: P2_2 = 1;
+                                    573 ;	assignBit
+      00005A D2 A2            [12]  574 	setb	_P2_2
+                                    575 ;	../include/tools.h:47: break;
+                                    576 ;	../include/tools.h:49: case 4: {
+      00005C 80 26            [24]  577 	sjmp	00109$
+      00005E                        578 00104$:
+                                    579 ;	../include/tools.h:50: P2_4 = 1;
+                                    580 ;	assignBit
+      00005E D2 A4            [12]  581 	setb	_P2_4
+                                    582 ;	../include/tools.h:51: P2_3 = 0;
+                                    583 ;	assignBit
+      000060 C2 A3            [12]  584 	clr	_P2_3
+                                    585 ;	../include/tools.h:52: P2_2 = 0;
+                                    586 ;	assignBit
+      000062 C2 A2            [12]  587 	clr	_P2_2
+                                    588 ;	../include/tools.h:53: break;
+                                    589 ;	../include/tools.h:55: case 5: {
+      000064 80 1E            [24]  590 	sjmp	00109$
+      000066                        591 00105$:
+                                    592 ;	../include/tools.h:56: P2_4 = 0;
+                                    593 ;	assignBit
+      000066 C2 A4            [12]  594 	clr	_P2_4
+                                    595 ;	../include/tools.h:57: P2_3 = 1;
+                                    596 ;	assignBit
+      000068 D2 A3            [12]  597 	setb	_P2_3
+                                    598 ;	../include/tools.h:58: P2_2 = 1;
+                                    599 ;	assignBit
+      00006A D2 A2            [12]  600 	setb	_P2_2
+                                    601 ;	../include/tools.h:59: break;
+                                    602 ;	../include/tools.h:61: case 6: {
+      00006C 80 16            [24]  603 	sjmp	00109$
+      00006E                        604 00106$:
+                                    605 ;	../include/tools.h:62: P2_4 = 0;
+                                    606 ;	assignBit
+      00006E C2 A4            [12]  607 	clr	_P2_4
+                                    608 ;	../include/tools.h:63: P2_3 = 1;
+                                    609 ;	assignBit
+      000070 D2 A3            [12]  610 	setb	_P2_3
+                                    611 ;	../include/tools.h:64: P2_2 = 0;
+                                    612 ;	assignBit
+      000072 C2 A2            [12]  613 	clr	_P2_2
+                                    614 ;	../include/tools.h:65: break;
+                                    615 ;	../include/tools.h:67: case 7: {
+      000074 80 0E            [24]  616 	sjmp	00109$
+      000076                        617 00107$:
+                                    618 ;	../include/tools.h:68: P2_4 = 0;
+                                    619 ;	assignBit
+      000076 C2 A4            [12]  620 	clr	_P2_4
+                                    621 ;	../include/tools.h:69: P2_3 = 0;
+                                    622 ;	assignBit
+      000078 C2 A3            [12]  623 	clr	_P2_3
+                                    624 ;	../include/tools.h:70: P2_2 = 1;
+                                    625 ;	assignBit
+      00007A D2 A2            [12]  626 	setb	_P2_2
+                                    627 ;	../include/tools.h:71: break;
+                                    628 ;	../include/tools.h:73: case 8: {
+      00007C 80 06            [24]  629 	sjmp	00109$
+      00007E                        630 00108$:
+                                    631 ;	../include/tools.h:74: P2_4 = 0;
+                                    632 ;	assignBit
+      00007E C2 A4            [12]  633 	clr	_P2_4
+                                    634 ;	../include/tools.h:75: P2_3 = 0;
+                                    635 ;	assignBit
+      000080 C2 A3            [12]  636 	clr	_P2_3
+                                    637 ;	../include/tools.h:76: P2_2 = 0;
+                                    638 ;	assignBit
+      000082 C2 A2            [12]  639 	clr	_P2_2
+                                    640 ;	../include/tools.h:79: }
+      000084                        641 00109$:
+                                    642 ;	../include/tools.h:81: P0 = NixieTable[number];
+      000084 E5*00            [12]  643 	mov	a,_Nixie_PARM_2
+      000086 24r00            [12]  644 	add	a,#_NixieTable
+      000088 F9               [12]  645 	mov	r1,a
+      000089 87 80            [24]  646 	mov	_P0,@r1
+                                    647 ;	../include/tools.h:82: }
+      00008B 22               [24]  648 	ret
+                                    649 ;------------------------------------------------------------
+                                    650 ;Allocation info for local variables in function 'LCD_Delay'
+                                    651 ;------------------------------------------------------------
+                                    652 ;i                         Allocated to registers r6 
+                                    653 ;j                         Allocated to registers r7 
+                                    654 ;------------------------------------------------------------
+                                    655 ;	../include/tools.h:93: void LCD_Delay()
+                                    656 ;	-----------------------------------------
+                                    657 ;	 function LCD_Delay
+                                    658 ;	-----------------------------------------
+      00008C                        659 _LCD_Delay:
+                                    660 ;	../include/tools.h:101: while (--j);
+      00008C 7F EF            [12]  661 	mov	r7,#0xef
+      00008E 7E 02            [12]  662 	mov	r6,#0x02
+      000090                        663 00101$:
+      000090 DF FE            [24]  664 	djnz	r7,00101$
+                                    665 ;	../include/tools.h:102: } while (--i);
+      000092 DE FC            [24]  666 	djnz	r6,00101$
+                                    667 ;	../include/tools.h:103: }
+      000094 22               [24]  668 	ret
+                                    669 ;------------------------------------------------------------
+                                    670 ;Allocation info for local variables in function 'LCD_WriteCommand'
+                                    671 ;------------------------------------------------------------
+                                    672 ;Command                   Allocated to registers r7 
+                                    673 ;------------------------------------------------------------
+                                    674 ;	../include/tools.h:110: void LCD_WriteCommand(unsigned char Command)
+                                    675 ;	-----------------------------------------
+                                    676 ;	 function LCD_WriteCommand
+                                    677 ;	-----------------------------------------
+      000095                        678 _LCD_WriteCommand:
+      000095 AF 82            [24]  679 	mov	r7,dpl
+                                    680 ;	../include/tools.h:112: P2_6=0;
+                                    681 ;	assignBit
+      000097 C2 A6            [12]  682 	clr	_P2_6
+                                    683 ;	../include/tools.h:113: P2_5=0;
+                                    684 ;	assignBit
+      000099 C2 A5            [12]  685 	clr	_P2_5
+                                    686 ;	../include/tools.h:114: LCD_DataPort=Command;
+      00009B 8F 80            [24]  687 	mov	_P0,r7
+                                    688 ;	../include/tools.h:115: P2_7=1;
+                                    689 ;	assignBit
+      00009D D2 A7            [12]  690 	setb	_P2_7
+                                    691 ;	../include/tools.h:116: LCD_Delay();
+      00009F 12r00r8C         [24]  692 	lcall	_LCD_Delay
+                                    693 ;	../include/tools.h:117: P2_7=0;
+                                    694 ;	assignBit
+      0000A2 C2 A7            [12]  695 	clr	_P2_7
+                                    696 ;	../include/tools.h:118: LCD_Delay();
+                                    697 ;	../include/tools.h:119: }
+      0000A4 02r00r8C         [24]  698 	ljmp	_LCD_Delay
+                                    699 ;------------------------------------------------------------
+                                    700 ;Allocation info for local variables in function 'LCD_WriteData'
+                                    701 ;------------------------------------------------------------
+                                    702 ;Data                      Allocated to registers r7 
+                                    703 ;------------------------------------------------------------
+                                    704 ;	../include/tools.h:126: void LCD_WriteData(unsigned char Data)
+                                    705 ;	-----------------------------------------
+                                    706 ;	 function LCD_WriteData
+                                    707 ;	-----------------------------------------
+      0000A7                        708 _LCD_WriteData:
+      0000A7 AF 82            [24]  709 	mov	r7,dpl
+                                    710 ;	../include/tools.h:128: P2_6=1;
+                                    711 ;	assignBit
+      0000A9 D2 A6            [12]  712 	setb	_P2_6
+                                    713 ;	../include/tools.h:129: P2_5=0;
+                                    714 ;	assignBit
+      0000AB C2 A5            [12]  715 	clr	_P2_5
+                                    716 ;	../include/tools.h:130: LCD_DataPort=Data;
+      0000AD 8F 80            [24]  717 	mov	_P0,r7
+                                    718 ;	../include/tools.h:131: P2_7=1;
+                                    719 ;	assignBit
+      0000AF D2 A7            [12]  720 	setb	_P2_7
+                                    721 ;	../include/tools.h:132: LCD_Delay();
+      0000B1 12r00r8C         [24]  722 	lcall	_LCD_Delay
+                                    723 ;	../include/tools.h:133: P2_7=0;
+                                    724 ;	assignBit
+      0000B4 C2 A7            [12]  725 	clr	_P2_7
+                                    726 ;	../include/tools.h:134: LCD_Delay();
+                                    727 ;	../include/tools.h:135: }
+      0000B6 02r00r8C         [24]  728 	ljmp	_LCD_Delay
+                                    729 ;------------------------------------------------------------
+                                    730 ;Allocation info for local variables in function 'LCD_SetCursor'
+                                    731 ;------------------------------------------------------------
+                                    732 ;Column                    Allocated with name '_LCD_SetCursor_PARM_2'
+                                    733 ;Line                      Allocated to registers r7 
+                                    734 ;------------------------------------------------------------
+                                    735 ;	../include/tools.h:143: void LCD_SetCursor(unsigned char Line,unsigned char Column)
+                                    736 ;	-----------------------------------------
+                                    737 ;	 function LCD_SetCursor
+                                    738 ;	-----------------------------------------
+      0000B9                        739 _LCD_SetCursor:
+      0000B9 AF 82            [24]  740 	mov	r7,dpl
+                                    741 ;	../include/tools.h:145: if(Line==1)
+      0000BB BF 01 0B         [24]  742 	cjne	r7,#0x01,00104$
+                                    743 ;	../include/tools.h:147: LCD_WriteCommand(0x80|(Column-1));
+      0000BE AE*11            [24]  744 	mov	r6,_LCD_SetCursor_PARM_2
+      0000C0 1E               [12]  745 	dec	r6
+      0000C1 74 80            [12]  746 	mov	a,#0x80
+      0000C3 4E               [12]  747 	orl	a,r6
+      0000C4 F5 82            [12]  748 	mov	dpl,a
+      0000C6 02r00r95         [24]  749 	ljmp	_LCD_WriteCommand
+      0000C9                        750 00104$:
+                                    751 ;	../include/tools.h:149: else if(Line==2)
+      0000C9 BF 02 0E         [24]  752 	cjne	r7,#0x02,00106$
+                                    753 ;	../include/tools.h:151: LCD_WriteCommand(0x80|(Column-1+0x40));
+      0000CC AF*11            [24]  754 	mov	r7,_LCD_SetCursor_PARM_2
+      0000CE 74 3F            [12]  755 	mov	a,#0x3f
+      0000D0 2F               [12]  756 	add	a,r7
+      0000D1 FF               [12]  757 	mov	r7,a
+      0000D2 74 80            [12]  758 	mov	a,#0x80
+      0000D4 4F               [12]  759 	orl	a,r7
+      0000D5 F5 82            [12]  760 	mov	dpl,a
+                                    761 ;	../include/tools.h:153: }
+      0000D7 02r00r95         [24]  762 	ljmp	_LCD_WriteCommand
+      0000DA                        763 00106$:
+      0000DA 22               [24]  764 	ret
+                                    765 ;------------------------------------------------------------
+                                    766 ;Allocation info for local variables in function 'LCD_Init'
+                                    767 ;------------------------------------------------------------
+                                    768 ;	../include/tools.h:160: void LCD_Init()
+                                    769 ;	-----------------------------------------
+                                    770 ;	 function LCD_Init
+                                    771 ;	-----------------------------------------
+      0000DB                        772 _LCD_Init:
+                                    773 ;	../include/tools.h:162: LCD_WriteCommand(0x38);//八位数据接口，两行显示，5*7点阵
+      0000DB 75 82 38         [24]  774 	mov	dpl,#0x38
+      0000DE 12r00r95         [24]  775 	lcall	_LCD_WriteCommand
+                                    776 ;	../include/tools.h:163: LCD_WriteCommand(0x0c);//显示开，光标关，闪烁关
+      0000E1 75 82 0C         [24]  777 	mov	dpl,#0x0c
+      0000E4 12r00r95         [24]  778 	lcall	_LCD_WriteCommand
+                                    779 ;	../include/tools.h:164: LCD_WriteCommand(0x06);//数据读写操作后，光标自动加一，画面不动
+      0000E7 75 82 06         [24]  780 	mov	dpl,#0x06
+      0000EA 12r00r95         [24]  781 	lcall	_LCD_WriteCommand
+                                    782 ;	../include/tools.h:165: LCD_WriteCommand(0x01);//光标复位，清屏
+      0000ED 75 82 01         [24]  783 	mov	dpl,#0x01
+                                    784 ;	../include/tools.h:166: }
+      0000F0 02r00r95         [24]  785 	ljmp	_LCD_WriteCommand
+                                    786 ;------------------------------------------------------------
+                                    787 ;Allocation info for local variables in function 'LCD_ShowChar'
+                                    788 ;------------------------------------------------------------
+                                    789 ;Column                    Allocated with name '_LCD_ShowChar_PARM_2'
+                                    790 ;Char                      Allocated with name '_LCD_ShowChar_PARM_3'
+                                    791 ;Line                      Allocated to registers r7 
+                                    792 ;------------------------------------------------------------
+                                    793 ;	../include/tools.h:175: void LCD_ShowChar(unsigned char Line,unsigned char Column,char Char)
+                                    794 ;	-----------------------------------------
+                                    795 ;	 function LCD_ShowChar
+                                    796 ;	-----------------------------------------
+      0000F3                        797 _LCD_ShowChar:
+                                    798 ;	../include/tools.h:177: LCD_SetCursor(Line,Column);
+      0000F3 85*12*11         [24]  799 	mov	_LCD_SetCursor_PARM_2,_LCD_ShowChar_PARM_2
+      0000F6 12r00rB9         [24]  800 	lcall	_LCD_SetCursor
+                                    801 ;	../include/tools.h:178: LCD_WriteData(Char);
+      0000F9 85*13 82         [24]  802 	mov	dpl,_LCD_ShowChar_PARM_3
+                                    803 ;	../include/tools.h:179: }
+      0000FC 02r00rA7         [24]  804 	ljmp	_LCD_WriteData
+                                    805 ;------------------------------------------------------------
+                                    806 ;Allocation info for local variables in function 'LCD_ShowString'
+                                    807 ;------------------------------------------------------------
+                                    808 ;Column                    Allocated with name '_LCD_ShowString_PARM_2'
+                                    809 ;String                    Allocated with name '_LCD_ShowString_PARM_3'
+                                    810 ;Line                      Allocated to registers r7 
+                                    811 ;i                         Allocated to registers r7 
+                                    812 ;------------------------------------------------------------
+                                    813 ;	../include/tools.h:188: void LCD_ShowString(unsigned char Line,unsigned char Column,char *String)
+                                    814 ;	-----------------------------------------
+                                    815 ;	 function LCD_ShowString
+                                    816 ;	-----------------------------------------
+      0000FF                        817 _LCD_ShowString:
+                                    818 ;	../include/tools.h:191: LCD_SetCursor(Line,Column);
+      0000FF 85*14*11         [24]  819 	mov	_LCD_SetCursor_PARM_2,_LCD_ShowString_PARM_2
+      000102 12r00rB9         [24]  820 	lcall	_LCD_SetCursor
+                                    821 ;	../include/tools.h:192: for(i=0;String[i]!='\0';i++)
+      000105 7F 00            [12]  822 	mov	r7,#0x00
+      000107                        823 00103$:
+      000107 EF               [12]  824 	mov	a,r7
+      000108 25*15            [12]  825 	add	a,_LCD_ShowString_PARM_3
+      00010A FC               [12]  826 	mov	r4,a
+      00010B E4               [12]  827 	clr	a
+      00010C 35*16            [12]  828 	addc	a,(_LCD_ShowString_PARM_3 + 1)
+      00010E FD               [12]  829 	mov	r5,a
+      00010F AE*17            [24]  830 	mov	r6,(_LCD_ShowString_PARM_3 + 2)
+      000111 8C 82            [24]  831 	mov	dpl,r4
+      000113 8D 83            [24]  832 	mov	dph,r5
+      000115 8E F0            [24]  833 	mov	b,r6
+      000117 12r00r00         [24]  834 	lcall	__gptrget
+      00011A FE               [12]  835 	mov	r6,a
+      00011B 60 0C            [24]  836 	jz	00105$
+                                    837 ;	../include/tools.h:194: LCD_WriteData(String[i]);
+      00011D 8E 82            [24]  838 	mov	dpl,r6
+      00011F C0 07            [24]  839 	push	ar7
+      000121 12r00rA7         [24]  840 	lcall	_LCD_WriteData
+      000124 D0 07            [24]  841 	pop	ar7
+                                    842 ;	../include/tools.h:192: for(i=0;String[i]!='\0';i++)
+      000126 0F               [12]  843 	inc	r7
+      000127 80 DE            [24]  844 	sjmp	00103$
+      000129                        845 00105$:
+                                    846 ;	../include/tools.h:196: }
+      000129 22               [24]  847 	ret
+                                    848 ;------------------------------------------------------------
+                                    849 ;Allocation info for local variables in function 'LCD_Pow'
+                                    850 ;------------------------------------------------------------
+                                    851 ;Y                         Allocated with name '_LCD_Pow_PARM_2'
+                                    852 ;X                         Allocated to registers r6 r7 
+                                    853 ;i                         Allocated to registers r3 
+                                    854 ;Result                    Allocated to registers r4 r5 
+                                    855 ;------------------------------------------------------------
+                                    856 ;	../include/tools.h:201: int LCD_Pow(int X,int Y)
+                                    857 ;	-----------------------------------------
+                                    858 ;	 function LCD_Pow
+                                    859 ;	-----------------------------------------
+      00012A                        860 _LCD_Pow:
+      00012A AE 82            [24]  861 	mov	r6,dpl
+      00012C AF 83            [24]  862 	mov	r7,dph
+                                    863 ;	../include/tools.h:204: int Result=1;
+      00012E 7C 01            [12]  864 	mov	r4,#0x01
+      000130 7D 00            [12]  865 	mov	r5,#0x00
+                                    866 ;	../include/tools.h:205: for(i=0;i<Y;i++)
+      000132 7B 00            [12]  867 	mov	r3,#0x00
+      000134                        868 00103$:
+      000134 8B 01            [24]  869 	mov	ar1,r3
+      000136 7A 00            [12]  870 	mov	r2,#0x00
+      000138 C3               [12]  871 	clr	c
+      000139 E9               [12]  872 	mov	a,r1
+      00013A 95*18            [12]  873 	subb	a,_LCD_Pow_PARM_2
+      00013C EA               [12]  874 	mov	a,r2
+      00013D 64 80            [12]  875 	xrl	a,#0x80
+      00013F 85*19 F0         [24]  876 	mov	b,(_LCD_Pow_PARM_2 + 1)
+      000142 63 F0 80         [24]  877 	xrl	b,#0x80
+      000145 95 F0            [12]  878 	subb	a,b
+      000147 50 1E            [24]  879 	jnc	00101$
+                                    880 ;	../include/tools.h:207: Result*=X;
+      000149 8E*00            [24]  881 	mov	__mulint_PARM_2,r6
+      00014B 8F*01            [24]  882 	mov	(__mulint_PARM_2 + 1),r7
+      00014D 8C 82            [24]  883 	mov	dpl,r4
+      00014F 8D 83            [24]  884 	mov	dph,r5
+      000151 C0 07            [24]  885 	push	ar7
+      000153 C0 06            [24]  886 	push	ar6
+      000155 C0 03            [24]  887 	push	ar3
+      000157 12r00r00         [24]  888 	lcall	__mulint
+      00015A AC 82            [24]  889 	mov	r4,dpl
+      00015C AD 83            [24]  890 	mov	r5,dph
+      00015E D0 03            [24]  891 	pop	ar3
+      000160 D0 06            [24]  892 	pop	ar6
+      000162 D0 07            [24]  893 	pop	ar7
+                                    894 ;	../include/tools.h:205: for(i=0;i<Y;i++)
+      000164 0B               [12]  895 	inc	r3
+      000165 80 CD            [24]  896 	sjmp	00103$
+      000167                        897 00101$:
+                                    898 ;	../include/tools.h:209: return Result;
+      000167 8C 82            [24]  899 	mov	dpl,r4
+      000169 8D 83            [24]  900 	mov	dph,r5
+                                    901 ;	../include/tools.h:210: }
+      00016B 22               [24]  902 	ret
+                                    903 ;------------------------------------------------------------
+                                    904 ;Allocation info for local variables in function 'LCD_ShowNum'
+                                    905 ;------------------------------------------------------------
+                                    906 ;Column                    Allocated with name '_LCD_ShowNum_PARM_2'
+                                    907 ;Number                    Allocated with name '_LCD_ShowNum_PARM_3'
+                                    908 ;Length                    Allocated with name '_LCD_ShowNum_PARM_4'
+                                    909 ;Line                      Allocated to registers r7 
+                                    910 ;i                         Allocated to registers 
+                                    911 ;------------------------------------------------------------
+                                    912 ;	../include/tools.h:220: void LCD_ShowNum(unsigned char Line,unsigned char Column,unsigned int Number,unsigned char Length)
+                                    913 ;	-----------------------------------------
+                                    914 ;	 function LCD_ShowNum
+                                    915 ;	-----------------------------------------
+      00016C                        916 _LCD_ShowNum:
+                                    917 ;	../include/tools.h:223: LCD_SetCursor(Line,Column);
+      00016C 85*1A*11         [24]  918 	mov	_LCD_SetCursor_PARM_2,_LCD_ShowNum_PARM_2
+      00016F 12r00rB9         [24]  919 	lcall	_LCD_SetCursor
+                                    920 ;	../include/tools.h:224: for(i=Length;i>0;i--)
+      000172 AF*1D            [24]  921 	mov	r7,_LCD_ShowNum_PARM_4
+      000174                        922 00103$:
+      000174 EF               [12]  923 	mov	a,r7
+      000175 60 3F            [24]  924 	jz	00105$
+                                    925 ;	../include/tools.h:226: LCD_WriteData(Number/LCD_Pow(10,i-1)%10+'0');
+      000177 8F 05            [24]  926 	mov	ar5,r7
+      000179 7E 00            [12]  927 	mov	r6,#0x00
+      00017B ED               [12]  928 	mov	a,r5
+      00017C 24 FF            [12]  929 	add	a,#0xff
+      00017E F5*18            [12]  930 	mov	_LCD_Pow_PARM_2,a
+      000180 EE               [12]  931 	mov	a,r6
+      000181 34 FF            [12]  932 	addc	a,#0xff
+      000183 F5*19            [12]  933 	mov	(_LCD_Pow_PARM_2 + 1),a
+      000185 90 00 0A         [24]  934 	mov	dptr,#0x000a
+      000188 C0 07            [24]  935 	push	ar7
+      00018A 12r01r2A         [24]  936 	lcall	_LCD_Pow
+      00018D AD 82            [24]  937 	mov	r5,dpl
+      00018F AE 83            [24]  938 	mov	r6,dph
+      000191 8D*00            [24]  939 	mov	__divuint_PARM_2,r5
+      000193 8E*01            [24]  940 	mov	(__divuint_PARM_2 + 1),r6
+      000195 85*1B 82         [24]  941 	mov	dpl,_LCD_ShowNum_PARM_3
+      000198 85*1C 83         [24]  942 	mov	dph,(_LCD_ShowNum_PARM_3 + 1)
+      00019B 12r00r00         [24]  943 	lcall	__divuint
+      00019E 75*00 0A         [24]  944 	mov	__moduint_PARM_2,#0x0a
+      0001A1 75*01 00         [24]  945 	mov	(__moduint_PARM_2 + 1),#0x00
+      0001A4 12r00r00         [24]  946 	lcall	__moduint
+      0001A7 AD 82            [24]  947 	mov	r5,dpl
+      0001A9 74 30            [12]  948 	mov	a,#0x30
+      0001AB 2D               [12]  949 	add	a,r5
+      0001AC F5 82            [12]  950 	mov	dpl,a
+      0001AE 12r00rA7         [24]  951 	lcall	_LCD_WriteData
+      0001B1 D0 07            [24]  952 	pop	ar7
+                                    953 ;	../include/tools.h:224: for(i=Length;i>0;i--)
+      0001B3 1F               [12]  954 	dec	r7
+      0001B4 80 BE            [24]  955 	sjmp	00103$
+      0001B6                        956 00105$:
+                                    957 ;	../include/tools.h:228: }
+      0001B6 22               [24]  958 	ret
+                                    959 ;------------------------------------------------------------
+                                    960 ;Allocation info for local variables in function 'LCD_ShowSignedNum'
+                                    961 ;------------------------------------------------------------
+                                    962 ;Column                    Allocated with name '_LCD_ShowSignedNum_PARM_2'
+                                    963 ;Number                    Allocated with name '_LCD_ShowSignedNum_PARM_3'
+                                    964 ;Length                    Allocated with name '_LCD_ShowSignedNum_PARM_4'
+                                    965 ;Line                      Allocated to registers r7 
+                                    966 ;i                         Allocated to registers 
+                                    967 ;Number1                   Allocated to registers r6 r7 
+                                    968 ;------------------------------------------------------------
+                                    969 ;	../include/tools.h:238: void LCD_ShowSignedNum(unsigned char Line,unsigned char Column,int Number,unsigned char Length)
+                                    970 ;	-----------------------------------------
+                                    971 ;	 function LCD_ShowSignedNum
+                                    972 ;	-----------------------------------------
+      0001B7                        973 _LCD_ShowSignedNum:
+                                    974 ;	../include/tools.h:242: LCD_SetCursor(Line,Column);
+      0001B7 85*1E*11         [24]  975 	mov	_LCD_SetCursor_PARM_2,_LCD_ShowSignedNum_PARM_2
+      0001BA 12r00rB9         [24]  976 	lcall	_LCD_SetCursor
+                                    977 ;	../include/tools.h:243: if(Number>=0)
+      0001BD E5*20            [12]  978 	mov	a,(_LCD_ShowSignedNum_PARM_3 + 1)
+      0001BF 20 E7 0C         [24]  979 	jb	acc.7,00102$
+                                    980 ;	../include/tools.h:245: LCD_WriteData('+');
+      0001C2 75 82 2B         [24]  981 	mov	dpl,#0x2b
+      0001C5 12r00rA7         [24]  982 	lcall	_LCD_WriteData
+                                    983 ;	../include/tools.h:246: Number1=Number;
+      0001C8 AE*1F            [24]  984 	mov	r6,_LCD_ShowSignedNum_PARM_3
+      0001CA AF*20            [24]  985 	mov	r7,(_LCD_ShowSignedNum_PARM_3 + 1)
+      0001CC 80 0F            [24]  986 	sjmp	00103$
+      0001CE                        987 00102$:
+                                    988 ;	../include/tools.h:250: LCD_WriteData('-');
+      0001CE 75 82 2D         [24]  989 	mov	dpl,#0x2d
+      0001D1 12r00rA7         [24]  990 	lcall	_LCD_WriteData
+                                    991 ;	../include/tools.h:251: Number1=-Number;
+      0001D4 C3               [12]  992 	clr	c
+      0001D5 E4               [12]  993 	clr	a
+      0001D6 95*1F            [12]  994 	subb	a,_LCD_ShowSignedNum_PARM_3
+      0001D8 FE               [12]  995 	mov	r6,a
+      0001D9 E4               [12]  996 	clr	a
+      0001DA 95*20            [12]  997 	subb	a,(_LCD_ShowSignedNum_PARM_3 + 1)
+      0001DC FF               [12]  998 	mov	r7,a
+      0001DD                        999 00103$:
+                                   1000 ;	../include/tools.h:253: for(i=Length;i>0;i--)
+      0001DD AD*21            [24] 1001 	mov	r5,_LCD_ShowSignedNum_PARM_4
+      0001DF                       1002 00106$:
+      0001DF ED               [12] 1003 	mov	a,r5
+      0001E0 60 51            [24] 1004 	jz	00108$
+                                   1005 ;	../include/tools.h:255: LCD_WriteData(Number1/LCD_Pow(10,i-1)%10+'0');
+      0001E2 8D 03            [24] 1006 	mov	ar3,r5
+      0001E4 7C 00            [12] 1007 	mov	r4,#0x00
+      0001E6 EB               [12] 1008 	mov	a,r3
+      0001E7 24 FF            [12] 1009 	add	a,#0xff
+      0001E9 F5*18            [12] 1010 	mov	_LCD_Pow_PARM_2,a
+      0001EB EC               [12] 1011 	mov	a,r4
+      0001EC 34 FF            [12] 1012 	addc	a,#0xff
+      0001EE F5*19            [12] 1013 	mov	(_LCD_Pow_PARM_2 + 1),a
+      0001F0 90 00 0A         [24] 1014 	mov	dptr,#0x000a
+      0001F3 C0 07            [24] 1015 	push	ar7
+      0001F5 C0 06            [24] 1016 	push	ar6
+      0001F7 C0 05            [24] 1017 	push	ar5
+      0001F9 12r01r2A         [24] 1018 	lcall	_LCD_Pow
+      0001FC AB 82            [24] 1019 	mov	r3,dpl
+      0001FE AC 83            [24] 1020 	mov	r4,dph
+      000200 D0 05            [24] 1021 	pop	ar5
+      000202 D0 06            [24] 1022 	pop	ar6
+      000204 D0 07            [24] 1023 	pop	ar7
+      000206 8B*00            [24] 1024 	mov	__divuint_PARM_2,r3
+      000208 8C*01            [24] 1025 	mov	(__divuint_PARM_2 + 1),r4
+      00020A 8E 82            [24] 1026 	mov	dpl,r6
+      00020C 8F 83            [24] 1027 	mov	dph,r7
+      00020E C0 07            [24] 1028 	push	ar7
+      000210 C0 06            [24] 1029 	push	ar6
+      000212 C0 05            [24] 1030 	push	ar5
+      000214 12r00r00         [24] 1031 	lcall	__divuint
+      000217 75*00 0A         [24] 1032 	mov	__moduint_PARM_2,#0x0a
+      00021A 75*01 00         [24] 1033 	mov	(__moduint_PARM_2 + 1),#0x00
+      00021D 12r00r00         [24] 1034 	lcall	__moduint
+      000220 AB 82            [24] 1035 	mov	r3,dpl
+      000222 74 30            [12] 1036 	mov	a,#0x30
+      000224 2B               [12] 1037 	add	a,r3
+      000225 F5 82            [12] 1038 	mov	dpl,a
+      000227 12r00rA7         [24] 1039 	lcall	_LCD_WriteData
+      00022A D0 05            [24] 1040 	pop	ar5
+      00022C D0 06            [24] 1041 	pop	ar6
+      00022E D0 07            [24] 1042 	pop	ar7
+                                   1043 ;	../include/tools.h:253: for(i=Length;i>0;i--)
+      000230 1D               [12] 1044 	dec	r5
+      000231 80 AC            [24] 1045 	sjmp	00106$
+      000233                       1046 00108$:
+                                   1047 ;	../include/tools.h:257: }
+      000233 22               [24] 1048 	ret
+                                   1049 ;------------------------------------------------------------
+                                   1050 ;Allocation info for local variables in function 'LCD_ShowHexNum'
+                                   1051 ;------------------------------------------------------------
+                                   1052 ;Column                    Allocated with name '_LCD_ShowHexNum_PARM_2'
+                                   1053 ;Number                    Allocated with name '_LCD_ShowHexNum_PARM_3'
+                                   1054 ;Length                    Allocated with name '_LCD_ShowHexNum_PARM_4'
+                                   1055 ;Line                      Allocated to registers r7 
+                                   1056 ;i                         Allocated to registers 
+                                   1057 ;SingleNumber              Allocated to registers r5 
+                                   1058 ;------------------------------------------------------------
+                                   1059 ;	../include/tools.h:267: void LCD_ShowHexNum(unsigned char Line,unsigned char Column,unsigned int Number,unsigned char Length)
+                                   1060 ;	-----------------------------------------
+                                   1061 ;	 function LCD_ShowHexNum
+                                   1062 ;	-----------------------------------------
+      000234                       1063 _LCD_ShowHexNum:
+                                   1064 ;	../include/tools.h:270: LCD_SetCursor(Line,Column);
+      000234 85*22*11         [24] 1065 	mov	_LCD_SetCursor_PARM_2,_LCD_ShowHexNum_PARM_2
+      000237 12r00rB9         [24] 1066 	lcall	_LCD_SetCursor
+                                   1067 ;	../include/tools.h:271: for(i=Length;i>0;i--)
+      00023A AF*25            [24] 1068 	mov	r7,_LCD_ShowHexNum_PARM_4
+      00023C                       1069 00106$:
+      00023C EF               [12] 1070 	mov	a,r7
+      00023D 60 55            [24] 1071 	jz	00108$
+                                   1072 ;	../include/tools.h:273: SingleNumber=Number/LCD_Pow(16,i-1)%16;
+      00023F 8F 05            [24] 1073 	mov	ar5,r7
+      000241 7E 00            [12] 1074 	mov	r6,#0x00
+      000243 ED               [12] 1075 	mov	a,r5
+      000244 24 FF            [12] 1076 	add	a,#0xff
+      000246 F5*18            [12] 1077 	mov	_LCD_Pow_PARM_2,a
+      000248 EE               [12] 1078 	mov	a,r6
+      000249 34 FF            [12] 1079 	addc	a,#0xff
+      00024B F5*19            [12] 1080 	mov	(_LCD_Pow_PARM_2 + 1),a
+      00024D 90 00 10         [24] 1081 	mov	dptr,#0x0010
+      000250 C0 07            [24] 1082 	push	ar7
+      000252 12r01r2A         [24] 1083 	lcall	_LCD_Pow
+      000255 AD 82            [24] 1084 	mov	r5,dpl
+      000257 AE 83            [24] 1085 	mov	r6,dph
+      000259 8D*00            [24] 1086 	mov	__divuint_PARM_2,r5
+      00025B 8E*01            [24] 1087 	mov	(__divuint_PARM_2 + 1),r6
+      00025D 85*23 82         [24] 1088 	mov	dpl,_LCD_ShowHexNum_PARM_3
+      000260 85*24 83         [24] 1089 	mov	dph,(_LCD_ShowHexNum_PARM_3 + 1)
+      000263 12r00r00         [24] 1090 	lcall	__divuint
+      000266 E5 82            [12] 1091 	mov	a,dpl
+      000268 85 83 F0         [24] 1092 	mov	b,dph
+      00026B D0 07            [24] 1093 	pop	ar7
+      00026D 54 0F            [12] 1094 	anl	a,#0x0f
+      00026F FD               [12] 1095 	mov	r5,a
+                                   1096 ;	../include/tools.h:274: if(SingleNumber<10)
+      000270 BD 0A 00         [24] 1097 	cjne	r5,#0x0a,00126$
+      000273                       1098 00126$:
+      000273 50 10            [24] 1099 	jnc	00102$
+                                   1100 ;	../include/tools.h:276: LCD_WriteData(SingleNumber+'0');
+      000275 8D 06            [24] 1101 	mov	ar6,r5
+      000277 74 30            [12] 1102 	mov	a,#0x30
+      000279 2E               [12] 1103 	add	a,r6
+      00027A F5 82            [12] 1104 	mov	dpl,a
+      00027C C0 07            [24] 1105 	push	ar7
+      00027E 12r00rA7         [24] 1106 	lcall	_LCD_WriteData
+      000281 D0 07            [24] 1107 	pop	ar7
+      000283 80 0C            [24] 1108 	sjmp	00107$
+      000285                       1109 00102$:
+                                   1110 ;	../include/tools.h:280: LCD_WriteData(SingleNumber-10+'A');
+      000285 74 37            [12] 1111 	mov	a,#0x37
+      000287 2D               [12] 1112 	add	a,r5
+      000288 F5 82            [12] 1113 	mov	dpl,a
+      00028A C0 07            [24] 1114 	push	ar7
+      00028C 12r00rA7         [24] 1115 	lcall	_LCD_WriteData
+      00028F D0 07            [24] 1116 	pop	ar7
+      000291                       1117 00107$:
+                                   1118 ;	../include/tools.h:271: for(i=Length;i>0;i--)
+      000291 1F               [12] 1119 	dec	r7
+      000292 80 A8            [24] 1120 	sjmp	00106$
+      000294                       1121 00108$:
+                                   1122 ;	../include/tools.h:283: }
+      000294 22               [24] 1123 	ret
+                                   1124 ;------------------------------------------------------------
+                                   1125 ;Allocation info for local variables in function 'LCD_ShowBinNum'
+                                   1126 ;------------------------------------------------------------
+                                   1127 ;Column                    Allocated with name '_LCD_ShowBinNum_PARM_2'
+                                   1128 ;Number                    Allocated with name '_LCD_ShowBinNum_PARM_3'
+                                   1129 ;Length                    Allocated with name '_LCD_ShowBinNum_PARM_4'
+                                   1130 ;Line                      Allocated to registers r7 
+                                   1131 ;i                         Allocated to registers 
+                                   1132 ;------------------------------------------------------------
+                                   1133 ;	../include/tools.h:293: void LCD_ShowBinNum(unsigned char Line,unsigned char Column,unsigned int Number,unsigned char Length)
+                                   1134 ;	-----------------------------------------
+                                   1135 ;	 function LCD_ShowBinNum
+                                   1136 ;	-----------------------------------------
+      000295                       1137 _LCD_ShowBinNum:
+                                   1138 ;	../include/tools.h:296: LCD_SetCursor(Line,Column);
+      000295 85*26*11         [24] 1139 	mov	_LCD_SetCursor_PARM_2,_LCD_ShowBinNum_PARM_2
+      000298 12r00rB9         [24] 1140 	lcall	_LCD_SetCursor
+                                   1141 ;	../include/tools.h:297: for(i=Length;i>0;i--)
+      00029B AF*29            [24] 1142 	mov	r7,_LCD_ShowBinNum_PARM_4
+      00029D                       1143 00103$:
+      00029D EF               [12] 1144 	mov	a,r7
+      00029E 60 3A            [24] 1145 	jz	00105$
+                                   1146 ;	../include/tools.h:299: LCD_WriteData(Number/LCD_Pow(2,i-1)%2+'0');
+      0002A0 8F 05            [24] 1147 	mov	ar5,r7
+      0002A2 7E 00            [12] 1148 	mov	r6,#0x00
+      0002A4 ED               [12] 1149 	mov	a,r5
+      0002A5 24 FF            [12] 1150 	add	a,#0xff
+      0002A7 F5*18            [12] 1151 	mov	_LCD_Pow_PARM_2,a
+      0002A9 EE               [12] 1152 	mov	a,r6
+      0002AA 34 FF            [12] 1153 	addc	a,#0xff
+      0002AC F5*19            [12] 1154 	mov	(_LCD_Pow_PARM_2 + 1),a
+      0002AE 90 00 02         [24] 1155 	mov	dptr,#0x0002
+      0002B1 C0 07            [24] 1156 	push	ar7
+      0002B3 12r01r2A         [24] 1157 	lcall	_LCD_Pow
+      0002B6 AD 82            [24] 1158 	mov	r5,dpl
+      0002B8 AE 83            [24] 1159 	mov	r6,dph
+      0002BA 8D*00            [24] 1160 	mov	__divuint_PARM_2,r5
+      0002BC 8E*01            [24] 1161 	mov	(__divuint_PARM_2 + 1),r6
+      0002BE 85*27 82         [24] 1162 	mov	dpl,_LCD_ShowBinNum_PARM_3
+      0002C1 85*28 83         [24] 1163 	mov	dph,(_LCD_ShowBinNum_PARM_3 + 1)
+      0002C4 12r00r00         [24] 1164 	lcall	__divuint
+      0002C7 E5 82            [12] 1165 	mov	a,dpl
+      0002C9 85 83 F0         [24] 1166 	mov	b,dph
+      0002CC 54 01            [12] 1167 	anl	a,#0x01
+      0002CE 24 30            [12] 1168 	add	a,#0x30
+      0002D0 F5 82            [12] 1169 	mov	dpl,a
+      0002D2 12r00rA7         [24] 1170 	lcall	_LCD_WriteData
+      0002D5 D0 07            [24] 1171 	pop	ar7
+                                   1172 ;	../include/tools.h:297: for(i=Length;i>0;i--)
+      0002D7 1F               [12] 1173 	dec	r7
+      0002D8 80 C3            [24] 1174 	sjmp	00103$
+      0002DA                       1175 00105$:
+                                   1176 ;	../include/tools.h:301: }
+      0002DA 22               [24] 1177 	ret
+                                   1178 ;------------------------------------------------------------
+                                   1179 ;Allocation info for local variables in function 'main'
+                                   1180 ;------------------------------------------------------------
+                                   1181 ;	main.c:3: void main() {
+                                   1182 ;	-----------------------------------------
+                                   1183 ;	 function main
+                                   1184 ;	-----------------------------------------
+      0002DB                       1185 _main:
+                                   1186 ;	main.c:4: LCD_Init();
+      0002DB 12r00rDB         [24] 1187 	lcall	_LCD_Init
+                                   1188 ;	main.c:5: LCD_ShowChar(1, 1, 'h');
+      0002DE 75*12 01         [24] 1189 	mov	_LCD_ShowChar_PARM_2,#0x01
+      0002E1 75*13 68         [24] 1190 	mov	_LCD_ShowChar_PARM_3,#0x68
+      0002E4 75 82 01         [24] 1191 	mov	dpl,#0x01
+      0002E7 12r00rF3         [24] 1192 	lcall	_LCD_ShowChar
+                                   1193 ;	main.c:6: LCD_ShowString(1, 3, "cxldada");
+      0002EA 75*15r00         [24] 1194 	mov	_LCD_ShowString_PARM_3,#___str_0
+      0002ED 75*16s00         [24] 1195 	mov	(_LCD_ShowString_PARM_3 + 1),#(___str_0 >> 8)
+      0002F0 75*17 80         [24] 1196 	mov	(_LCD_ShowString_PARM_3 + 2),#0x80
+      0002F3 75*14 03         [24] 1197 	mov	_LCD_ShowString_PARM_2,#0x03
+      0002F6 75 82 01         [24] 1198 	mov	dpl,#0x01
+      0002F9 12r00rFF         [24] 1199 	lcall	_LCD_ShowString
+                                   1200 ;	main.c:7: while (1) {
+      0002FC                       1201 00102$:
+                                   1202 ;	main.c:9: }
+      0002FC 80 FE            [24] 1203 	sjmp	00102$
+                                   1204 	.area CSEG    (CODE)
+                                   1205 	.area CONST   (CODE)
+                                   1206 	.area CONST   (CODE)
+      000000                       1207 ___str_0:
+      000000 63 78 6C 64 61 64 61  1208 	.ascii "cxldada"
+      000007 00                    1209 	.db 0x00
+                                   1210 	.area CSEG    (CODE)
+                                   1211 	.area XINIT   (CODE)
+                                   1212 	.area CABS    (ABS,CODE)

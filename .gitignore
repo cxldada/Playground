@@ -1,0 +1,11 @@
+*.out
+*.dSYM
+.DS_Store
+*.rar
+*.zip
+*.tar*
+*.o
+.cache
+compile_commands.json
+build
+.vscode

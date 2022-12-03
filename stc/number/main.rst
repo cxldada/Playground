@@ -1,0 +1,661 @@
+                                      1 ;--------------------------------------------------------
+                                      2 ; File Created by SDCC : free open source ANSI-C Compiler
+                                      3 ; Version 4.1.0 #12072 (Mac OS X x86_64)
+                                      4 ;--------------------------------------------------------
+                                      5 	.module main
+                                      6 	.optsdcc -mmcs51 --model-small
+                                      7 	
+                                      8 ;--------------------------------------------------------
+                                      9 ; Public variables in this module
+                                     10 ;--------------------------------------------------------
+                                     11 	.globl _Nixie_PARM_2
+                                     12 	.globl _main
+                                     13 	.globl _Nixie
+                                     14 	.globl _delay
+                                     15 	.globl _TF2
+                                     16 	.globl _EXF2
+                                     17 	.globl _RCLK
+                                     18 	.globl _TCLK
+                                     19 	.globl _EXEN2
+                                     20 	.globl _TR2
+                                     21 	.globl _C_T2
+                                     22 	.globl _CP_RL2
+                                     23 	.globl _T2CON_7
+                                     24 	.globl _T2CON_6
+                                     25 	.globl _T2CON_5
+                                     26 	.globl _T2CON_4
+                                     27 	.globl _T2CON_3
+                                     28 	.globl _T2CON_2
+                                     29 	.globl _T2CON_1
+                                     30 	.globl _T2CON_0
+                                     31 	.globl _PT2
+                                     32 	.globl _ET2
+                                     33 	.globl _CY
+                                     34 	.globl _AC
+                                     35 	.globl _F0
+                                     36 	.globl _RS1
+                                     37 	.globl _RS0
+                                     38 	.globl _OV
+                                     39 	.globl _F1
+                                     40 	.globl _P
+                                     41 	.globl _PS
+                                     42 	.globl _PT1
+                                     43 	.globl _PX1
+                                     44 	.globl _PT0
+                                     45 	.globl _PX0
+                                     46 	.globl _RD
+                                     47 	.globl _WR
+                                     48 	.globl _T1
+                                     49 	.globl _T0
+                                     50 	.globl _INT1
+                                     51 	.globl _INT0
+                                     52 	.globl _TXD
+                                     53 	.globl _RXD
+                                     54 	.globl _P3_7
+                                     55 	.globl _P3_6
+                                     56 	.globl _P3_5
+                                     57 	.globl _P3_4
+                                     58 	.globl _P3_3
+                                     59 	.globl _P3_2
+                                     60 	.globl _P3_1
+                                     61 	.globl _P3_0
+                                     62 	.globl _EA
+                                     63 	.globl _ES
+                                     64 	.globl _ET1
+                                     65 	.globl _EX1
+                                     66 	.globl _ET0
+                                     67 	.globl _EX0
+                                     68 	.globl _P2_7
+                                     69 	.globl _P2_6
+                                     70 	.globl _P2_5
+                                     71 	.globl _P2_4
+                                     72 	.globl _P2_3
+                                     73 	.globl _P2_2
+                                     74 	.globl _P2_1
+                                     75 	.globl _P2_0
+                                     76 	.globl _SM0
+                                     77 	.globl _SM1
+                                     78 	.globl _SM2
+                                     79 	.globl _REN
+                                     80 	.globl _TB8
+                                     81 	.globl _RB8
+                                     82 	.globl _TI
+                                     83 	.globl _RI
+                                     84 	.globl _P1_7
+                                     85 	.globl _P1_6
+                                     86 	.globl _P1_5
+                                     87 	.globl _P1_4
+                                     88 	.globl _P1_3
+                                     89 	.globl _P1_2
+                                     90 	.globl _P1_1
+                                     91 	.globl _P1_0
+                                     92 	.globl _TF1
+                                     93 	.globl _TR1
+                                     94 	.globl _TF0
+                                     95 	.globl _TR0
+                                     96 	.globl _IE1
+                                     97 	.globl _IT1
+                                     98 	.globl _IE0
+                                     99 	.globl _IT0
+                                    100 	.globl _P0_7
+                                    101 	.globl _P0_6
+                                    102 	.globl _P0_5
+                                    103 	.globl _P0_4
+                                    104 	.globl _P0_3
+                                    105 	.globl _P0_2
+                                    106 	.globl _P0_1
+                                    107 	.globl _P0_0
+                                    108 	.globl _TH2
+                                    109 	.globl _TL2
+                                    110 	.globl _RCAP2H
+                                    111 	.globl _RCAP2L
+                                    112 	.globl _T2CON
+                                    113 	.globl _B
+                                    114 	.globl _ACC
+                                    115 	.globl _PSW
+                                    116 	.globl _IP
+                                    117 	.globl _P3
+                                    118 	.globl _IE
+                                    119 	.globl _P2
+                                    120 	.globl _SBUF
+                                    121 	.globl _SCON
+                                    122 	.globl _P1
+                                    123 	.globl _TH1
+                                    124 	.globl _TH0
+                                    125 	.globl _TL1
+                                    126 	.globl _TL0
+                                    127 	.globl _TMOD
+                                    128 	.globl _TCON
+                                    129 	.globl _PCON
+                                    130 	.globl _DPH
+                                    131 	.globl _DPL
+                                    132 	.globl _SP
+                                    133 	.globl _P0
+                                    134 	.globl _NixieTable
+                                    135 ;--------------------------------------------------------
+                                    136 ; special function registers
+                                    137 ;--------------------------------------------------------
+                                    138 	.area RSEG    (ABS,DATA)
+      000000                        139 	.org 0x0000
+                           000080   140 _P0	=	0x0080
+                           000081   141 _SP	=	0x0081
+                           000082   142 _DPL	=	0x0082
+                           000083   143 _DPH	=	0x0083
+                           000087   144 _PCON	=	0x0087
+                           000088   145 _TCON	=	0x0088
+                           000089   146 _TMOD	=	0x0089
+                           00008A   147 _TL0	=	0x008a
+                           00008B   148 _TL1	=	0x008b
+                           00008C   149 _TH0	=	0x008c
+                           00008D   150 _TH1	=	0x008d
+                           000090   151 _P1	=	0x0090
+                           000098   152 _SCON	=	0x0098
+                           000099   153 _SBUF	=	0x0099
+                           0000A0   154 _P2	=	0x00a0
+                           0000A8   155 _IE	=	0x00a8
+                           0000B0   156 _P3	=	0x00b0
+                           0000B8   157 _IP	=	0x00b8
+                           0000D0   158 _PSW	=	0x00d0
+                           0000E0   159 _ACC	=	0x00e0
+                           0000F0   160 _B	=	0x00f0
+                           0000C8   161 _T2CON	=	0x00c8
+                           0000CA   162 _RCAP2L	=	0x00ca
+                           0000CB   163 _RCAP2H	=	0x00cb
+                           0000CC   164 _TL2	=	0x00cc
+                           0000CD   165 _TH2	=	0x00cd
+                                    166 ;--------------------------------------------------------
+                                    167 ; special function bits
+                                    168 ;--------------------------------------------------------
+                                    169 	.area RSEG    (ABS,DATA)
+      000000                        170 	.org 0x0000
+                           000080   171 _P0_0	=	0x0080
+                           000081   172 _P0_1	=	0x0081
+                           000082   173 _P0_2	=	0x0082
+                           000083   174 _P0_3	=	0x0083
+                           000084   175 _P0_4	=	0x0084
+                           000085   176 _P0_5	=	0x0085
+                           000086   177 _P0_6	=	0x0086
+                           000087   178 _P0_7	=	0x0087
+                           000088   179 _IT0	=	0x0088
+                           000089   180 _IE0	=	0x0089
+                           00008A   181 _IT1	=	0x008a
+                           00008B   182 _IE1	=	0x008b
+                           00008C   183 _TR0	=	0x008c
+                           00008D   184 _TF0	=	0x008d
+                           00008E   185 _TR1	=	0x008e
+                           00008F   186 _TF1	=	0x008f
+                           000090   187 _P1_0	=	0x0090
+                           000091   188 _P1_1	=	0x0091
+                           000092   189 _P1_2	=	0x0092
+                           000093   190 _P1_3	=	0x0093
+                           000094   191 _P1_4	=	0x0094
+                           000095   192 _P1_5	=	0x0095
+                           000096   193 _P1_6	=	0x0096
+                           000097   194 _P1_7	=	0x0097
+                           000098   195 _RI	=	0x0098
+                           000099   196 _TI	=	0x0099
+                           00009A   197 _RB8	=	0x009a
+                           00009B   198 _TB8	=	0x009b
+                           00009C   199 _REN	=	0x009c
+                           00009D   200 _SM2	=	0x009d
+                           00009E   201 _SM1	=	0x009e
+                           00009F   202 _SM0	=	0x009f
+                           0000A0   203 _P2_0	=	0x00a0
+                           0000A1   204 _P2_1	=	0x00a1
+                           0000A2   205 _P2_2	=	0x00a2
+                           0000A3   206 _P2_3	=	0x00a3
+                           0000A4   207 _P2_4	=	0x00a4
+                           0000A5   208 _P2_5	=	0x00a5
+                           0000A6   209 _P2_6	=	0x00a6
+                           0000A7   210 _P2_7	=	0x00a7
+                           0000A8   211 _EX0	=	0x00a8
+                           0000A9   212 _ET0	=	0x00a9
+                           0000AA   213 _EX1	=	0x00aa
+                           0000AB   214 _ET1	=	0x00ab
+                           0000AC   215 _ES	=	0x00ac
+                           0000AF   216 _EA	=	0x00af
+                           0000B0   217 _P3_0	=	0x00b0
+                           0000B1   218 _P3_1	=	0x00b1
+                           0000B2   219 _P3_2	=	0x00b2
+                           0000B3   220 _P3_3	=	0x00b3
+                           0000B4   221 _P3_4	=	0x00b4
+                           0000B5   222 _P3_5	=	0x00b5
+                           0000B6   223 _P3_6	=	0x00b6
+                           0000B7   224 _P3_7	=	0x00b7
+                           0000B0   225 _RXD	=	0x00b0
+                           0000B1   226 _TXD	=	0x00b1
+                           0000B2   227 _INT0	=	0x00b2
+                           0000B3   228 _INT1	=	0x00b3
+                           0000B4   229 _T0	=	0x00b4
+                           0000B5   230 _T1	=	0x00b5
+                           0000B6   231 _WR	=	0x00b6
+                           0000B7   232 _RD	=	0x00b7
+                           0000B8   233 _PX0	=	0x00b8
+                           0000B9   234 _PT0	=	0x00b9
+                           0000BA   235 _PX1	=	0x00ba
+                           0000BB   236 _PT1	=	0x00bb
+                           0000BC   237 _PS	=	0x00bc
+                           0000D0   238 _P	=	0x00d0
+                           0000D1   239 _F1	=	0x00d1
+                           0000D2   240 _OV	=	0x00d2
+                           0000D3   241 _RS0	=	0x00d3
+                           0000D4   242 _RS1	=	0x00d4
+                           0000D5   243 _F0	=	0x00d5
+                           0000D6   244 _AC	=	0x00d6
+                           0000D7   245 _CY	=	0x00d7
+                           0000AD   246 _ET2	=	0x00ad
+                           0000BD   247 _PT2	=	0x00bd
+                           0000C8   248 _T2CON_0	=	0x00c8
+                           0000C9   249 _T2CON_1	=	0x00c9
+                           0000CA   250 _T2CON_2	=	0x00ca
+                           0000CB   251 _T2CON_3	=	0x00cb
+                           0000CC   252 _T2CON_4	=	0x00cc
+                           0000CD   253 _T2CON_5	=	0x00cd
+                           0000CE   254 _T2CON_6	=	0x00ce
+                           0000CF   255 _T2CON_7	=	0x00cf
+                           0000C8   256 _CP_RL2	=	0x00c8
+                           0000C9   257 _C_T2	=	0x00c9
+                           0000CA   258 _TR2	=	0x00ca
+                           0000CB   259 _EXEN2	=	0x00cb
+                           0000CC   260 _TCLK	=	0x00cc
+                           0000CD   261 _RCLK	=	0x00cd
+                           0000CE   262 _EXF2	=	0x00ce
+                           0000CF   263 _TF2	=	0x00cf
+                                    264 ;--------------------------------------------------------
+                                    265 ; overlayable register banks
+                                    266 ;--------------------------------------------------------
+                                    267 	.area REG_BANK_0	(REL,OVR,DATA)
+      000000                        268 	.ds 8
+                                    269 ;--------------------------------------------------------
+                                    270 ; internal ram data
+                                    271 ;--------------------------------------------------------
+                                    272 	.area DSEG    (DATA)
+      000008                        273 _NixieTable::
+      000008                        274 	.ds 17
+                                    275 ;--------------------------------------------------------
+                                    276 ; overlayable items in internal ram 
+                                    277 ;--------------------------------------------------------
+                                    278 	.area	OSEG    (OVR,DATA)
+                                    279 	.area	OSEG    (OVR,DATA)
+      000019                        280 _Nixie_PARM_2:
+      000019                        281 	.ds 1
+                                    282 ;--------------------------------------------------------
+                                    283 ; Stack segment in internal ram 
+                                    284 ;--------------------------------------------------------
+                                    285 	.area	SSEG
+      00001A                        286 __start__stack:
+      00001A                        287 	.ds	1
+                                    288 
+                                    289 ;--------------------------------------------------------
+                                    290 ; indirectly addressable internal ram data
+                                    291 ;--------------------------------------------------------
+                                    292 	.area ISEG    (DATA)
+                                    293 ;--------------------------------------------------------
+                                    294 ; absolute internal ram data
+                                    295 ;--------------------------------------------------------
+                                    296 	.area IABS    (ABS,DATA)
+                                    297 	.area IABS    (ABS,DATA)
+                                    298 ;--------------------------------------------------------
+                                    299 ; bit data
+                                    300 ;--------------------------------------------------------
+                                    301 	.area BSEG    (BIT)
+                                    302 ;--------------------------------------------------------
+                                    303 ; paged external ram data
+                                    304 ;--------------------------------------------------------
+                                    305 	.area PSEG    (PAG,XDATA)
+                                    306 ;--------------------------------------------------------
+                                    307 ; external ram data
+                                    308 ;--------------------------------------------------------
+                                    309 	.area XSEG    (XDATA)
+                                    310 ;--------------------------------------------------------
+                                    311 ; absolute external ram data
+                                    312 ;--------------------------------------------------------
+                                    313 	.area XABS    (ABS,XDATA)
+                                    314 ;--------------------------------------------------------
+                                    315 ; external initialized ram data
+                                    316 ;--------------------------------------------------------
+                                    317 	.area XISEG   (XDATA)
+                                    318 	.area HOME    (CODE)
+                                    319 	.area GSINIT0 (CODE)
+                                    320 	.area GSINIT1 (CODE)
+                                    321 	.area GSINIT2 (CODE)
+                                    322 	.area GSINIT3 (CODE)
+                                    323 	.area GSINIT4 (CODE)
+                                    324 	.area GSINIT5 (CODE)
+                                    325 	.area GSINIT  (CODE)
+                                    326 	.area GSFINAL (CODE)
+                                    327 	.area CSEG    (CODE)
+                                    328 ;--------------------------------------------------------
+                                    329 ; interrupt vector 
+                                    330 ;--------------------------------------------------------
+                                    331 	.area HOME    (CODE)
+      000000                        332 __interrupt_vect:
+      000000 02 00 06         [24]  333 	ljmp	__sdcc_gsinit_startup
+                                    334 ;--------------------------------------------------------
+                                    335 ; global & static initialisations
+                                    336 ;--------------------------------------------------------
+                                    337 	.area HOME    (CODE)
+                                    338 	.area GSINIT  (CODE)
+                                    339 	.area GSFINAL (CODE)
+                                    340 	.area GSINIT  (CODE)
+                                    341 	.globl __sdcc_gsinit_startup
+                                    342 	.globl __sdcc_program_startup
+                                    343 	.globl __start__stack
+                                    344 	.globl __mcs51_genXINIT
+                                    345 	.globl __mcs51_genXRAMCLEAR
+                                    346 	.globl __mcs51_genRAMCLEAR
+                                    347 ;	../include/tools.h:23: unsigned char NixieTable[] = {
+      00005F 75 08 3F         [24]  348 	mov	_NixieTable,#0x3f
+      000062 75 09 06         [24]  349 	mov	(_NixieTable + 0x0001),#0x06
+      000065 75 0A 5B         [24]  350 	mov	(_NixieTable + 0x0002),#0x5b
+      000068 75 0B 4F         [24]  351 	mov	(_NixieTable + 0x0003),#0x4f
+      00006B 75 0C 66         [24]  352 	mov	(_NixieTable + 0x0004),#0x66
+      00006E 75 0D 6D         [24]  353 	mov	(_NixieTable + 0x0005),#0x6d
+      000071 75 0E 7D         [24]  354 	mov	(_NixieTable + 0x0006),#0x7d
+      000074 75 0F 07         [24]  355 	mov	(_NixieTable + 0x0007),#0x07
+      000077 75 10 7F         [24]  356 	mov	(_NixieTable + 0x0008),#0x7f
+      00007A 75 11 6F         [24]  357 	mov	(_NixieTable + 0x0009),#0x6f
+      00007D 75 12 77         [24]  358 	mov	(_NixieTable + 0x000a),#0x77
+      000080 75 13 7C         [24]  359 	mov	(_NixieTable + 0x000b),#0x7c
+      000083 75 14 39         [24]  360 	mov	(_NixieTable + 0x000c),#0x39
+      000086 75 15 5E         [24]  361 	mov	(_NixieTable + 0x000d),#0x5e
+      000089 75 16 79         [24]  362 	mov	(_NixieTable + 0x000e),#0x79
+      00008C 75 17 71         [24]  363 	mov	(_NixieTable + 0x000f),#0x71
+      00008F 75 18 00         [24]  364 	mov	(_NixieTable + 0x0010),#0x00
+                                    365 	.area GSFINAL (CODE)
+      000092 02 00 03         [24]  366 	ljmp	__sdcc_program_startup
+                                    367 ;--------------------------------------------------------
+                                    368 ; Home
+                                    369 ;--------------------------------------------------------
+                                    370 	.area HOME    (CODE)
+                                    371 	.area HOME    (CODE)
+      000003                        372 __sdcc_program_startup:
+      000003 02 01 21         [24]  373 	ljmp	_main
+                                    374 ;	return from main will return to caller
+                                    375 ;--------------------------------------------------------
+                                    376 ; code
+                                    377 ;--------------------------------------------------------
+                                    378 	.area CSEG    (CODE)
+                                    379 ;------------------------------------------------------------
+                                    380 ;Allocation info for local variables in function 'delay'
+                                    381 ;------------------------------------------------------------
+                                    382 ;ms                        Allocated to registers 
+                                    383 ;i                         Allocated to registers r4 
+                                    384 ;j                         Allocated to registers r5 
+                                    385 ;------------------------------------------------------------
+                                    386 ;	../include/tools.h:3: void delay(unsigned int ms) {
+                                    387 ;	-----------------------------------------
+                                    388 ;	 function delay
+                                    389 ;	-----------------------------------------
+      000095                        390 _delay:
+                           000007   391 	ar7 = 0x07
+                           000006   392 	ar6 = 0x06
+                           000005   393 	ar5 = 0x05
+                           000004   394 	ar4 = 0x04
+                           000003   395 	ar3 = 0x03
+                           000002   396 	ar2 = 0x02
+                           000001   397 	ar1 = 0x01
+                           000000   398 	ar0 = 0x00
+      000095 AE 82            [24]  399 	mov	r6,dpl
+      000097 AF 83            [24]  400 	mov	r7,dph
+                                    401 ;	../include/tools.h:6: while (ms--) {
+      000099                        402 00107$:
+      000099 8E 04            [24]  403 	mov	ar4,r6
+      00009B 8F 05            [24]  404 	mov	ar5,r7
+      00009D 1E               [12]  405 	dec	r6
+      00009E BE FF 01         [24]  406 	cjne	r6,#0xff,00134$
+      0000A1 1F               [12]  407 	dec	r7
+      0000A2                        408 00134$:
+      0000A2 EC               [12]  409 	mov	a,r4
+      0000A3 4D               [12]  410 	orl	a,r5
+      0000A4 60 0A            [24]  411 	jz	00110$
+                                    412 ;	../include/tools.h:10: while (--j)
+      0000A6 7D EF            [12]  413 	mov	r5,#0xef
+      0000A8 7C 02            [12]  414 	mov	r4,#0x02
+      0000AA                        415 00101$:
+      0000AA DD FE            [24]  416 	djnz	r5,00101$
+                                    417 ;	../include/tools.h:12: } while (--i);
+      0000AC DC FC            [24]  418 	djnz	r4,00101$
+      0000AE 80 E9            [24]  419 	sjmp	00107$
+      0000B0                        420 00110$:
+                                    421 ;	../include/tools.h:14: }
+      0000B0 22               [24]  422 	ret
+                                    423 ;------------------------------------------------------------
+                                    424 ;Allocation info for local variables in function 'Nixie'
+                                    425 ;------------------------------------------------------------
+                                    426 ;number                    Allocated with name '_Nixie_PARM_2'
+                                    427 ;localtion                 Allocated to registers r7 
+                                    428 ;------------------------------------------------------------
+                                    429 ;	../include/tools.h:42: void Nixie(unsigned char localtion, unsigned char number) {
+                                    430 ;	-----------------------------------------
+                                    431 ;	 function Nixie
+                                    432 ;	-----------------------------------------
+      0000B1                        433 _Nixie:
+                                    434 ;	../include/tools.h:43: switch (localtion) {
+      0000B1 E5 82            [12]  435 	mov	a,dpl
+      0000B3 FF               [12]  436 	mov	r7,a
+      0000B4 24 F7            [12]  437 	add	a,#0xff - 0x08
+      0000B6 50 03            [24]  438 	jnc	00116$
+      0000B8 02 01 19         [24]  439 	ljmp	00109$
+      0000BB                        440 00116$:
+      0000BB EF               [12]  441 	mov	a,r7
+      0000BC 24 0A            [12]  442 	add	a,#(00117$-3-.)
+      0000BE 83               [24]  443 	movc	a,@a+pc
+      0000BF F5 82            [12]  444 	mov	dpl,a
+      0000C1 EF               [12]  445 	mov	a,r7
+      0000C2 24 0D            [12]  446 	add	a,#(00118$-3-.)
+      0000C4 83               [24]  447 	movc	a,@a+pc
+      0000C5 F5 83            [12]  448 	mov	dph,a
+      0000C7 E4               [12]  449 	clr	a
+      0000C8 73               [24]  450 	jmp	@a+dptr
+      0000C9                        451 00117$:
+      0000C9 19                     452 	.db	00109$
+      0000CA DB                     453 	.db	00101$
+      0000CB E3                     454 	.db	00102$
+      0000CC EB                     455 	.db	00103$
+      0000CD F3                     456 	.db	00104$
+      0000CE FB                     457 	.db	00105$
+      0000CF 03                     458 	.db	00106$
+      0000D0 0B                     459 	.db	00107$
+      0000D1 13                     460 	.db	00108$
+      0000D2                        461 00118$:
+      0000D2 01                     462 	.db	00109$>>8
+      0000D3 00                     463 	.db	00101$>>8
+      0000D4 00                     464 	.db	00102$>>8
+      0000D5 00                     465 	.db	00103$>>8
+      0000D6 00                     466 	.db	00104$>>8
+      0000D7 00                     467 	.db	00105$>>8
+      0000D8 01                     468 	.db	00106$>>8
+      0000D9 01                     469 	.db	00107$>>8
+      0000DA 01                     470 	.db	00108$>>8
+                                    471 ;	../include/tools.h:44: case 1: {
+      0000DB                        472 00101$:
+                                    473 ;	../include/tools.h:45: P2_4 = 1;
+                                    474 ;	assignBit
+      0000DB D2 A4            [12]  475 	setb	_P2_4
+                                    476 ;	../include/tools.h:46: P2_3 = 1;
+                                    477 ;	assignBit
+      0000DD D2 A3            [12]  478 	setb	_P2_3
+                                    479 ;	../include/tools.h:47: P2_2 = 1;
+                                    480 ;	assignBit
+      0000DF D2 A2            [12]  481 	setb	_P2_2
+                                    482 ;	../include/tools.h:48: break;
+                                    483 ;	../include/tools.h:50: case 2: {
+      0000E1 80 36            [24]  484 	sjmp	00109$
+      0000E3                        485 00102$:
+                                    486 ;	../include/tools.h:51: P2_4 = 1;
+                                    487 ;	assignBit
+      0000E3 D2 A4            [12]  488 	setb	_P2_4
+                                    489 ;	../include/tools.h:52: P2_3 = 1;
+                                    490 ;	assignBit
+      0000E5 D2 A3            [12]  491 	setb	_P2_3
+                                    492 ;	../include/tools.h:53: P2_2 = 0;
+                                    493 ;	assignBit
+      0000E7 C2 A2            [12]  494 	clr	_P2_2
+                                    495 ;	../include/tools.h:54: break;
+                                    496 ;	../include/tools.h:56: case 3: {
+      0000E9 80 2E            [24]  497 	sjmp	00109$
+      0000EB                        498 00103$:
+                                    499 ;	../include/tools.h:57: P2_4 = 1;
+                                    500 ;	assignBit
+      0000EB D2 A4            [12]  501 	setb	_P2_4
+                                    502 ;	../include/tools.h:58: P2_3 = 0;
+                                    503 ;	assignBit
+      0000ED C2 A3            [12]  504 	clr	_P2_3
+                                    505 ;	../include/tools.h:59: P2_2 = 1;
+                                    506 ;	assignBit
+      0000EF D2 A2            [12]  507 	setb	_P2_2
+                                    508 ;	../include/tools.h:60: break;
+                                    509 ;	../include/tools.h:62: case 4: {
+      0000F1 80 26            [24]  510 	sjmp	00109$
+      0000F3                        511 00104$:
+                                    512 ;	../include/tools.h:63: P2_4 = 1;
+                                    513 ;	assignBit
+      0000F3 D2 A4            [12]  514 	setb	_P2_4
+                                    515 ;	../include/tools.h:64: P2_3 = 0;
+                                    516 ;	assignBit
+      0000F5 C2 A3            [12]  517 	clr	_P2_3
+                                    518 ;	../include/tools.h:65: P2_2 = 0;
+                                    519 ;	assignBit
+      0000F7 C2 A2            [12]  520 	clr	_P2_2
+                                    521 ;	../include/tools.h:66: break;
+                                    522 ;	../include/tools.h:68: case 5: {
+      0000F9 80 1E            [24]  523 	sjmp	00109$
+      0000FB                        524 00105$:
+                                    525 ;	../include/tools.h:69: P2_4 = 0;
+                                    526 ;	assignBit
+      0000FB C2 A4            [12]  527 	clr	_P2_4
+                                    528 ;	../include/tools.h:70: P2_3 = 1;
+                                    529 ;	assignBit
+      0000FD D2 A3            [12]  530 	setb	_P2_3
+                                    531 ;	../include/tools.h:71: P2_2 = 1;
+                                    532 ;	assignBit
+      0000FF D2 A2            [12]  533 	setb	_P2_2
+                                    534 ;	../include/tools.h:72: break;
+                                    535 ;	../include/tools.h:74: case 6: {
+      000101 80 16            [24]  536 	sjmp	00109$
+      000103                        537 00106$:
+                                    538 ;	../include/tools.h:75: P2_4 = 0;
+                                    539 ;	assignBit
+      000103 C2 A4            [12]  540 	clr	_P2_4
+                                    541 ;	../include/tools.h:76: P2_3 = 1;
+                                    542 ;	assignBit
+      000105 D2 A3            [12]  543 	setb	_P2_3
+                                    544 ;	../include/tools.h:77: P2_2 = 0;
+                                    545 ;	assignBit
+      000107 C2 A2            [12]  546 	clr	_P2_2
+                                    547 ;	../include/tools.h:78: break;
+                                    548 ;	../include/tools.h:80: case 7: {
+      000109 80 0E            [24]  549 	sjmp	00109$
+      00010B                        550 00107$:
+                                    551 ;	../include/tools.h:81: P2_4 = 0;
+                                    552 ;	assignBit
+      00010B C2 A4            [12]  553 	clr	_P2_4
+                                    554 ;	../include/tools.h:82: P2_3 = 0;
+                                    555 ;	assignBit
+      00010D C2 A3            [12]  556 	clr	_P2_3
+                                    557 ;	../include/tools.h:83: P2_2 = 1;
+                                    558 ;	assignBit
+      00010F D2 A2            [12]  559 	setb	_P2_2
+                                    560 ;	../include/tools.h:84: break;
+                                    561 ;	../include/tools.h:86: case 8: {
+      000111 80 06            [24]  562 	sjmp	00109$
+      000113                        563 00108$:
+                                    564 ;	../include/tools.h:87: P2_4 = 0;
+                                    565 ;	assignBit
+      000113 C2 A4            [12]  566 	clr	_P2_4
+                                    567 ;	../include/tools.h:88: P2_3 = 0;
+                                    568 ;	assignBit
+      000115 C2 A3            [12]  569 	clr	_P2_3
+                                    570 ;	../include/tools.h:89: P2_2 = 0;
+                                    571 ;	assignBit
+      000117 C2 A2            [12]  572 	clr	_P2_2
+                                    573 ;	../include/tools.h:92: }
+      000119                        574 00109$:
+                                    575 ;	../include/tools.h:94: P0 = NixieTable[number];
+      000119 E5 19            [12]  576 	mov	a,_Nixie_PARM_2
+      00011B 24 08            [12]  577 	add	a,#_NixieTable
+      00011D F9               [12]  578 	mov	r1,a
+      00011E 87 80            [24]  579 	mov	_P0,@r1
+                                    580 ;	../include/tools.h:95: }
+      000120 22               [24]  581 	ret
+                                    582 ;------------------------------------------------------------
+                                    583 ;Allocation info for local variables in function 'main'
+                                    584 ;------------------------------------------------------------
+                                    585 ;	main.c:3: void main() {
+                                    586 ;	-----------------------------------------
+                                    587 ;	 function main
+                                    588 ;	-----------------------------------------
+      000121                        589 _main:
+                                    590 ;	main.c:4: while (1) {
+      000121                        591 00102$:
+                                    592 ;	main.c:5: Nixie(1, 1);
+      000121 75 19 01         [24]  593 	mov	_Nixie_PARM_2,#0x01
+      000124 75 82 01         [24]  594 	mov	dpl,#0x01
+      000127 12 00 B1         [24]  595 	lcall	_Nixie
+                                    596 ;	main.c:6: Nixie(1, Nixie_Null);
+      00012A 75 19 10         [24]  597 	mov	_Nixie_PARM_2,#0x10
+      00012D 75 82 01         [24]  598 	mov	dpl,#0x01
+      000130 12 00 B1         [24]  599 	lcall	_Nixie
+                                    600 ;	main.c:7: Nixie(2, 9);
+      000133 75 19 09         [24]  601 	mov	_Nixie_PARM_2,#0x09
+      000136 75 82 02         [24]  602 	mov	dpl,#0x02
+      000139 12 00 B1         [24]  603 	lcall	_Nixie
+                                    604 ;	main.c:8: Nixie(2, Nixie_Null);
+      00013C 75 19 10         [24]  605 	mov	_Nixie_PARM_2,#0x10
+      00013F 75 82 02         [24]  606 	mov	dpl,#0x02
+      000142 12 00 B1         [24]  607 	lcall	_Nixie
+                                    608 ;	main.c:9: Nixie(3, 9);
+      000145 75 19 09         [24]  609 	mov	_Nixie_PARM_2,#0x09
+      000148 75 82 03         [24]  610 	mov	dpl,#0x03
+      00014B 12 00 B1         [24]  611 	lcall	_Nixie
+                                    612 ;	main.c:10: Nixie(3, Nixie_Null);
+      00014E 75 19 10         [24]  613 	mov	_Nixie_PARM_2,#0x10
+      000151 75 82 03         [24]  614 	mov	dpl,#0x03
+      000154 12 00 B1         [24]  615 	lcall	_Nixie
+                                    616 ;	main.c:11: Nixie(4, 6);
+      000157 75 19 06         [24]  617 	mov	_Nixie_PARM_2,#0x06
+      00015A 75 82 04         [24]  618 	mov	dpl,#0x04
+      00015D 12 00 B1         [24]  619 	lcall	_Nixie
+                                    620 ;	main.c:12: Nixie(4, Nixie_Null);
+      000160 75 19 10         [24]  621 	mov	_Nixie_PARM_2,#0x10
+      000163 75 82 04         [24]  622 	mov	dpl,#0x04
+      000166 12 00 B1         [24]  623 	lcall	_Nixie
+                                    624 ;	main.c:13: Nixie(5, 1);
+      000169 75 19 01         [24]  625 	mov	_Nixie_PARM_2,#0x01
+      00016C 75 82 05         [24]  626 	mov	dpl,#0x05
+      00016F 12 00 B1         [24]  627 	lcall	_Nixie
+                                    628 ;	main.c:14: Nixie(5, Nixie_Null);
+      000172 75 19 10         [24]  629 	mov	_Nixie_PARM_2,#0x10
+      000175 75 82 05         [24]  630 	mov	dpl,#0x05
+      000178 12 00 B1         [24]  631 	lcall	_Nixie
+                                    632 ;	main.c:15: Nixie(6, 1);
+      00017B 75 19 01         [24]  633 	mov	_Nixie_PARM_2,#0x01
+      00017E 75 82 06         [24]  634 	mov	dpl,#0x06
+      000181 12 00 B1         [24]  635 	lcall	_Nixie
+                                    636 ;	main.c:16: Nixie(6, Nixie_Null);
+      000184 75 19 10         [24]  637 	mov	_Nixie_PARM_2,#0x10
+      000187 75 82 06         [24]  638 	mov	dpl,#0x06
+      00018A 12 00 B1         [24]  639 	lcall	_Nixie
+                                    640 ;	main.c:17: Nixie(7, 1);
+      00018D 75 19 01         [24]  641 	mov	_Nixie_PARM_2,#0x01
+      000190 75 82 07         [24]  642 	mov	dpl,#0x07
+      000193 12 00 B1         [24]  643 	lcall	_Nixie
+                                    644 ;	main.c:18: Nixie(7, Nixie_Null);
+      000196 75 19 10         [24]  645 	mov	_Nixie_PARM_2,#0x10
+      000199 75 82 07         [24]  646 	mov	dpl,#0x07
+      00019C 12 00 B1         [24]  647 	lcall	_Nixie
+                                    648 ;	main.c:19: Nixie(8, 8);
+      00019F 75 19 08         [24]  649 	mov	_Nixie_PARM_2,#0x08
+      0001A2 75 82 08         [24]  650 	mov	dpl,#0x08
+      0001A5 12 00 B1         [24]  651 	lcall	_Nixie
+                                    652 ;	main.c:20: Nixie(8, Nixie_Null);
+      0001A8 75 19 10         [24]  653 	mov	_Nixie_PARM_2,#0x10
+      0001AB 75 82 08         [24]  654 	mov	dpl,#0x08
+      0001AE 12 00 B1         [24]  655 	lcall	_Nixie
+                                    656 ;	main.c:22: }
+      0001B1 02 01 21         [24]  657 	ljmp	00102$
+                                    658 	.area CSEG    (CODE)
+                                    659 	.area CONST   (CODE)
+                                    660 	.area XINIT   (CODE)
+                                    661 	.area CABS    (ABS,CODE)

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        div{
+            color: red;
+            width: 400px;
+            height: 100px;
+            /* 设置边框 宽度 类型 颜色 */
+            border: 1px solid red;
+            /* 设置背景颜色 单词 #十六进制比 rgb(r,g,b) */
+            background-color: red;
+            /* 设置背景图片 url(图片链接或路径) 默认平铺 图片会覆盖背景颜色属性*/
+            background-image: none;
+            /* 设置背景图片的平铺方式 repeat repeat-x repeat-y no-repeat*/
+            background-repeat: repeat;
+            /* 
+            设置背景图片位置
+            单词 left right center bottom 可以填两个词
+            x,y轴
+                像素
+                百分比
+             */
+            background-position: 0%;
+            /* 设置背景图片的大小 
+            contain: 一边铺满，另一边不管
+            cover: 两边都铺满
+            x,y轴：一个值表示宽度，两个值表示宽高
+            */
+            background-size: auto;
+            /* 设置背景图片是否固定 
+            scroll: 随滚动条滚动
+            fixed：不随滚动条滚动
+            */
+            background-attachment: scroll;
+            /* 复合属性 /前面表示图片位置 /后面表示图片大小 */
+            background: pink url(http:baidu.com) no-repeat 50% 50% /100px 100px fixed
+        }
+    </style>
+</head>
+<body>
+    <div>牛逼</div>
+</body>
+</html>

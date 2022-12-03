@@ -1,0 +1,5 @@
+#!/usr/bin/bash
+# 测试bc程序
+
+var1=$(echo "scale=4; 3.44 / 5" | bc)
+echo The answer is $var1
