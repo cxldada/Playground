@@ -1,4 +1,5 @@
 #include <iostream>
+using namespace std;
 
 template<typename T>
 class Singleton
@@ -52,7 +53,7 @@ private:
 class PlayerSystemMgr : public Singleton<PlayerSystemMgr>
 {
 public:
-    PlayerSystemMgr() {}
+    PlayerSystemMgr() { std::cout << "create PlayerSystemMgr" << std::endl; }
     ~PlayerSystemMgr(){};
 
     bool RegisterSystemInterface(IPlayerSystemInterface* iSystem)
@@ -68,6 +69,19 @@ public:
         return true;
     }
 
+    int Init()
+    {
+        for (int i = 0; i < 100; ++i) {
+            IPlayerSystemInterface* pTemp = arrayInterface[i];
+            if (pTemp) {
+                int ret = pTemp->OnInit();
+                if (ret != 0) return ret;
+            }
+        }
+
+        return 0;
+    }
+
 private:
     IPlayerSystemInterface* arrayInterface[100];
     int                     curIndex;
@@ -76,9 +90,11 @@ private:
 template<typename T>
 class PlayerBaseSystem : public IPlayerSystemInterface, public Singleton<T>
 {
-private:
-    struct STHelper{
-        STHelper() {
+public:
+    struct STHelper
+    {
+        STHelper()
+        {
             std::cout << "helper" << std::endl;
             PlayerSystemMgr::Instance()->RegisterSystemInterface(T::Instance());
         }
@@ -88,21 +104,23 @@ private:
     static STHelper helper;
 
 public:
+    // PlayerBaseSystem() = default;
     PlayerBaseSystem()
     {
         std::cout << "PlayerBaseSystem" << std::endl;
         helper.DoNothing();
     }
 
-    virtual ~PlayerBaseSystem() {}
+    virtual ~PlayerBaseSystem() = default;
 };
 template<typename T>
-typename PlayerBaseSystem<T>::STHelper PlayerBaseSystem<T>::helper;
+typename PlayerBaseSystem<T>::STHelper PlayerBaseSystem<T>::helper{};
 
 class A : public PlayerBaseSystem<A>
 {
 public:
-    A() { std::cout << "create A" << std::endl; }
+    // A() { std::cout << "create A" << std::endl; }
+    A() = default;
 
     int OnInit() override
     {
@@ -113,6 +131,7 @@ public:
 
 int main(int argc, char* argv[])
 {
-    A::Instance()->OnInit();
+    PlayerSystemMgr::Instance()->Init();
+    cout << "==========" << endl;
     return 0;
 }
