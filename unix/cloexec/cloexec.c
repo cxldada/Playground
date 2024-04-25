@@ -23,7 +23,7 @@ int main(int argc, char const *argv[]) {
             printf("child process fd2: %d\n", fd2);
         }
         {
-            // 代码快1
+            // 代码块1
             if (execlp("./hello", "hello") == -1) {
                 printf("execlp hello error\n");
                 exit(errno);
